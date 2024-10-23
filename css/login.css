@@ -1,0 +1,123 @@
+/* 
+    Document   : login
+    Created on : Nov 3, 2014, 5:24:56 PM
+    Author     : user
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+html { 
+    /*    background: url(bg.jpg) no-repeat center center fixed; */
+    /*    -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;*/
+}
+body {
+    background-color: #HHHHHH;
+    color: #333333;
+    font-family: verdana,sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    background: #fff none repeat scroll 0 0;
+}
+
+.login_form {
+    width:450px;
+    height:250px;
+    margin:200px auto;
+    padding:0;
+    border:1px solid #f4f4f4;
+    /*background:rgba(255, 255, 255, 0.897);*/
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:5px;
+        -webkit-box-shadow: 0 0 2px #aaa;
+    -moz-box-shadow: 0 0 2px #aaa;
+    box-shadow: 0 0 2px #aaa;
+}
+/*
+body{
+    font-size: 12px;
+    font-family: Arial;
+    background: #08001f none repeat scroll 0 0;
+}*/
+
+.lg-container{
+    width:450px;
+    height:250px;
+    margin:200px auto;
+    padding:0;
+    border:1px solid #f4f4f4;
+    background:rgba(100, 115, 121, 1.9);
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:5px;
+        -webkit-box-shadow: 0 0 2px #aaa;
+    -moz-box-shadow: 0 0 2px #aaa;
+    box-shadow: 0 0 2px #aaa;
+}
+.lg-container h1{
+    font-size:40px;
+    text-align:center;
+}
+#lg-form > div {
+    /*    margin:10px 5px;
+        padding:5px 0;*/
+}
+
+#lg-form input[type="text"],
+#lg-form input[type="password"]{
+    background: url("text-bg.gif") repeat-x scroll 0 0 #FFFFFF;
+    border-color: #8a6a00;
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 3px;
+    /*line-height: 25px;*/
+    width: 97%;
+
+}
+#lg-form div:nth-child(3) {
+    text-align:center;
+}
+#lg-form button{
+    cursor: pointer;
+    vertical-align: middle;   
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+    background: linear-gradient(to bottom, #FFFFFF 0px, #EEEEEE 100%) repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #BBBBBB;
+    border-radius: 2px;
+    color: #333300;
+}
+#lg-form button:active{
+    -webkit-box-shadow: 0px 0px 1px #aaa;
+    -moz-box-shadow: 0px 0px 1px #aaa;
+    box-shadow: 0px 0px 1px #aaa;
+}
+#lg-form button:hover{
+    background:#f4f4f4;
+}
+#lg-form label{
+    font-weight: bold;
+    font-size: 13px;
+    /*    color:#0000FF;*/
+}
+
+#message{width:100%;text-align:center}
+.success {
+    color: green;
+}
+.error {
+    color: red;
+}

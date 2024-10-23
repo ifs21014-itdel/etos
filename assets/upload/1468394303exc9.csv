@@ -1,0 +1,2 @@
+ID,SKU,Barcode,Name,carton,inner,uom_id,cost,retail_price,trading_price,category1,category2,category3,category4,type,taxed,consignment,created_date,updated_date,bom_status,status_sku
+1458880990,259766907,14576089,SATE SAMBAL,1,1,1,20000,5000,0,PERISHABLE,8,31,172,1,0,0,,,0,ACTIVE

@@ -1,0 +1,622 @@
+.icon-product{
+    background:url('icons/product.png') no-repeat center center;
+}
+
+.icon-blank{
+    background:url('icons/blank.gif') no-repeat center center;
+}
+.icon-add{
+    background:url('icons/add.png') no-repeat center center;
+}
+.icon-edit{
+    background:url('icons/pencil_2.png') no-repeat center center;
+}
+
+.icon-check-sheet{
+    background:url('icons/check-sheet.png') no-repeat center center;
+}
+
+.icon-progress{
+    background:url('icons/progress.png') no-repeat center center;
+}
+
+
+.icon-edit-specification{
+    background:url('icons/edit-specification.png') no-repeat center center;
+}
+
+.icon-import{
+    background:url('icons/import.png') no-repeat center center;
+}
+
+.icon-update-progress{
+    background:url('icons/update-progress.png') no-repeat center center;
+}
+
+.icon-finishing-edit{
+    background:url('icons/finishing-edit.png') no-repeat center center;
+}
+.icon-price-list{
+    background:url('icons/price-list.png') no-repeat center center;
+}
+
+.icon-finished{
+    background:url('icons/finished.png') no-repeat center center;
+}
+
+.icon-rate{
+    background:url('icons/rate.png') no-repeat center center;
+}
+
+.icon-remove{
+    background:url('icons/delete.png') no-repeat center center;
+}
+.icon-save{
+    background:url('icons/filesave.png') no-repeat center center;
+}
+.icon-print{
+    background:url('icons/print.png') no-repeat center center;
+}
+.icon-excel{
+    background:url('icons/excel-icon.png') no-repeat center center;
+}
+.icon-report{
+    background:url('icons/report.png') no-repeat center center;
+}
+.icon-cut{
+    background:url('icons/cut.png') no-repeat center center;
+}
+
+.icon-cutting-list{
+    background:url('icons/cutting-list.png') no-repeat center center;
+}
+.icon-finishing-type{
+    background:url('icons/finishing-type.png') no-repeat center center;
+}
+
+.icon-preview{
+    background:url('icons/preview.png') no-repeat center center;
+}
+.icon-ok{
+    background:url('icons/ok.png') no-repeat center center;
+}
+.icon-dollar{
+    background:url('icons/dollar.png') no-repeat center center;
+}
+
+.icon-no{
+    background:url('icons/no.png') no-repeat center center;
+}
+.icon-cancel{
+    background:url('icons/cancel.png') no-repeat center center;
+}
+.icon-reload{
+    background:url('icons/reload.png') no-repeat center center;
+}
+.icon-search{
+    background:url('icons/search.png') no-repeat center center;
+}
+.icon-print{
+    background:url('icons/print.png') no-repeat center center;
+}
+.icon-help{
+    background:url('icons/help.png') no-repeat center center;
+}
+.icon-undo{
+    background:url('icons/undo.png') no-repeat center center;
+}
+.icon-redo{
+    background:url('icons/redo.png') no-repeat center center;
+}
+.icon-back{
+    background:url('icons/back.png') no-repeat center center;
+}
+.icon-sum{
+    background:url('icons/sum.png') no-repeat center center;
+}
+.icon-country{
+    background:url('icons/country.jpeg') no-repeat center center;
+}
+.icon-color{
+    background:url('icons/color.png') no-repeat center center;
+}
+.icon-receipt{
+    background:url('icons/receipt.png') no-repeat center center;
+}
+.icon-shipment{
+    background:url('icons/shipment.png') no-repeat center center;
+}
+.icon-stock{
+    background:url('icons/stock.png') no-repeat center center;
+}
+.icon-payment-term{
+    background:url('icons/payment-term.png') no-repeat center center;
+}
+.icon-product-type{
+    background:url('icons/product-type.png') no-repeat center center;
+}
+
+.icon-tip{
+    background:url('icons/tip.png') no-repeat center center;
+}
+
+.icon-mini-add{
+    background:url('icons/mini_add.png') no-repeat center center;
+}
+.icon-mini-edit{
+    background:url('icons/mini_edit.png') no-repeat center center;
+}
+
+.icon-refresh{
+    background:url('icons/refresh.png') no-repeat center center;
+}
+
+.icon-mini-refresh{
+    background:url('icons/mini_refresh.png') no-repeat center center;
+}
+.icon-main-menu{
+    background:url('icons/menu.png') no-repeat center center;
+}
+.icon-purchase_order{
+    background:url('icons/purchase_order.png') no-repeat center center;
+}
+.icon-order{
+    background:url('icons/order.png') no-repeat center center;
+}
+.icon-logout{
+    background:url('icons/logout.png') no-repeat center center;
+}
+
+.icon-customer{
+    background:url('icons/customer.png') no-repeat center center;
+}
+.icon-change-password{
+    background:url('icons/change-password.png') no-repeat center center;
+}
+.icon-complete{
+    background:url('icons/ok.png') no-repeat center center;
+}
+.icon-type{
+    background:url('icons/type.png') no-repeat center center;
+}
+.icon-user{
+    background:url('icons/user.png') no-repeat center center;
+}
+
+.icon-user-config{
+    background:url('icons/user-config.png') no-repeat center center;
+}
+
+.icon-paid{
+    background:url('icons/paid.png') no-repeat center center;
+}
+.icon-request{
+    background:url('icons/request.png') no-repeat center center;
+}
+.icon-barcode{
+    background:url('icons/barcodes-icon.png') no-repeat center center;
+}
+.icon-item-in{
+    background:url('icons/item-in.png') no-repeat center center;
+}
+.icon-item-out{
+    background:url('icons/item-out.png') no-repeat center center;
+}
+.icon-csv{
+    background:url('icons/csv.png') no-repeat center center;
+}
+.icon-remove-row{
+    background:url('icons/row-delete.png') no-repeat center center;
+}
+.icon-users{
+    background:url('icons/users.png') no-repeat center center;
+}
+.icon-pointer{
+    background:url('icons/pointer.png') no-repeat center center;
+}
+.icon-build{
+    background:url('icons/build.png') no-repeat center center;
+}
+.icon-add-child{
+    background:url('icons/add-child.png') no-repeat center center;
+}
+.icon-wait{
+    background:url('icons/hand.png') no-repeat center center;
+}
+.icon-reject{
+    background:url('icons/reject.png') no-repeat center center;
+}
+.icon-configuration{
+    background:url('icons/configuration.png') no-repeat center center;
+}
+.icon-pdf{
+    background:url('icons/pdf.png') no-repeat center center;
+}
+.icon-approval{
+    background:url('icons/approval.png') no-repeat center center;
+}
+
+.icon-process_approve{
+    background:url('icons/process_approve.png') no-repeat center center;
+}
+.icon-decisions_approve{
+    background:url('icons/decisions_approve.png') no-repeat center center;
+}
+.icon-edit-information{
+    background:url('icons/edit_information.png') no-repeat center center;
+}
+.icon-edit-price{
+    background:url('icons/edit_price.png') no-repeat center center;
+}
+.icon-user-privilege{
+    background:url('icons/user-properties.png') no-repeat center center;
+}
+.icon-disable{
+    background:url('icons/disable.png') no-repeat center center;
+}
+
+.icon-enable{
+    background:url('icons/enable.png') no-repeat center center;
+}
+
+.icon-clear{
+    background:url('icons/clear.png') no-repeat center center;
+}
+
+.icon-receive{
+    background:url('icons/receive.png') no-repeat center center;
+}
+
+.icon-close{
+    background:url('icons/close.png') no-repeat center center;
+}
+
+.icon-open{
+    background:url('icons/open.png') no-repeat center center;
+}
+.icon-history{
+    background:url('icons/history.png') no-repeat center center;
+}
+
+.icon-barcode{
+    background:url('icons/barcodes-icon.png') no-repeat center center;
+}
+.icon-copy{
+    background:url('icons/copy.png') no-repeat center center;
+}
+.icon-generate{
+    background:url('icons/generate.png') no-repeat center center;
+}
+.icon-calculate{
+    background:url('icons/calculate.png') no-repeat center center;
+}
+
+.icon-load{
+    background:url('icons/load.png') no-repeat center center;
+}
+
+.icon-cancel2{
+    background:url('icons/cancel2.png') no-repeat center center;
+}
+.icon-save2{
+    background:url('icons/save2.png') no-repeat center center;
+}
+.icon-move{
+    background:url('icons/move.png') no-repeat center center;
+}
+
+.icon-process{
+    background:url('icons/process.png') no-repeat center center;
+}
+
+.icon-finish{
+    background:url('icons/finish.png') no-repeat center center;
+}
+
+.icon-release{
+    background:url('icons/release.png') no-repeat center center;
+}
+.icon-outsource{
+    background:url('icons/outsource.png') no-repeat center center;
+}
+
+.icon-outstanding{
+    background:url('icons/outstanding.png') no-repeat center center;
+}
+.icon-requisition{
+    background:url('icons/requisition.png') no-repeat center center;
+}
+
+.icon-manufacturing{
+    background:url('icons/manufacturing.png') no-repeat center center;
+}
+
+.icon-sales{
+    background:url('icons/sales.png') no-repeat center center;
+}
+
+.icon-inventory{
+    background:url('icons/inventory.png') no-repeat center center;
+}
+
+.icon-sales-order{
+    background:url('icons/sales-order.png') no-repeat center center;
+}
+
+.icon-job-order{
+    background:url('icons/job-order.png') no-repeat center center;
+}
+
+.icon-tracking{
+    background:url('icons/tracking.png') no-repeat center center;
+}
+
+.icon-sales-invoice{
+    background:url('icons/sales-invoice.png') no-repeat center center;
+}
+
+.icon-costing{
+    background:url('icons/costing.png') no-repeat center center;
+}
+
+.icon-customer{
+    background:url('icons/customer.png') no-repeat center center;
+}
+
+.icon-model{
+    background:url('icons/model.png') no-repeat center center;
+}
+
+.icon-model-category{
+    background:url('icons/model-category.png') no-repeat center center;
+}
+
+.icon-model-stock{
+    background:url('icons/model-stock.png') no-repeat center center;
+}
+
+.icon-finishing{
+    background:url('icons/finishing.png') no-repeat center center;
+}
+
+.icon-material{
+    background:url('icons/material.png') no-repeat center center;
+}
+
+.icon-top{
+    background:url('icons/top.png') no-repeat center center;
+}
+
+.icon-mirror-glass{
+    background:url('icons/mirror-glass.png') no-repeat center center;
+}
+
+.icon-warehouse{
+    background:url('icons/warehouse.png') no-repeat center center;
+}
+
+.icon-unit{
+    background:url('icons/unit.png') no-repeat center center;
+}
+
+.icon-item{
+    background:url('icons/item.png') no-repeat center center;
+}
+
+.icon-job-outsource{
+    background:url('icons/job-outsource.png') no-repeat center center;
+}
+
+.icon-stock-out{
+    background:url('icons/stock-out.png') no-repeat center center;
+}
+
+.icon-item-group{
+    background:url('icons/item-group.png') no-repeat center center;
+}
+
+.icon-summary{
+    background:url('icons/summary.png') no-repeat center center;
+}
+
+.icon-employee{
+    background:url('icons/employee.png') no-repeat center center;
+}
+
+.icon-department{
+    background:url('icons/department.png') no-repeat center center;
+}
+
+.icon-job-title{
+    background:url('icons/job-title.png') no-repeat center center;
+}
+
+.icon-currency{
+    background:url('icons/currency.png') no-repeat center center;
+}
+
+.icon-purchase-order{
+    background:url('icons/purchase-order.png') no-repeat center center;
+}
+
+.icon-purchase-order-detail{
+    background:url('icons/purchase-order-detail.png') no-repeat center center;
+}
+.icon-material-withdraw{
+    background:url('icons/material-withdraw.png') no-repeat center center;
+}
+
+.icon-goods-receive{
+    background:url('icons/goods-receive.png') no-repeat center center;
+}
+
+.icon-vendor{
+    background:url('icons/vendor.png') no-repeat center center;
+}
+
+.icon-foam{
+    background:url('icons/foam.png') no-repeat center center;
+}
+
+.icon-interliner{
+    background:url('icons/interliner.png') no-repeat center center;
+}
+
+.icon-fabric{
+    background:url('icons/fabric.png') no-repeat center center;
+}
+
+.icon-furing{
+    background:url('icons/furing.png') no-repeat center center;
+}
+
+.icon-accessories{
+    background:url('icons/accessories.png') no-repeat center center;
+}
+
+.icon-stage{
+    background:url('icons/stage.png') no-repeat center center;
+}
+
+
+.icon-purchase-request{
+    background:url('icons/purchase-request.png') no-repeat center center;
+}
+
+.icon-purchase-request-detail{
+    background:url('icons/purchase-request-detail.png') no-repeat center center;
+}
+
+.icon-material-requisition{
+    background:url('icons/material-requisition.png') no-repeat center center;
+}
+
+.icon-material-requisition-item{
+    background:url('icons/material-requisition-item.png') no-repeat center center;
+}
+
+.icon-add-model{
+    background:url('icons/add-model.png') no-repeat center center;
+}
+
+.icon-mark-final{
+    background:url('icons/mark_final.png') no-repeat center center;
+}
+
+.icon-section{
+    background:url('icons/section.png') no-repeat center center;
+}
+
+.icon-subsection{
+    background:url('icons/subsection.png') no-repeat center center;
+}
+
+.icon-material-trash{
+    background:url('icons/material_trash.png') no-repeat center center;
+}
+
+.icon-revision{
+    background:url('icons/revision.png') no-repeat center center;
+}
+
+.icon-payment{
+    background:url('icons/payment.png') no-repeat center center;
+}
+.icon-more{
+    background:url('icons/more.png') no-repeat center center;
+}
+.icon-define{
+    background:url('icons/define.png') no-repeat center center;
+}
+
+.icon-shipping{
+    background:url('icons/shipping.png') no-repeat center center;
+}
+
+.icon-quotation{
+    background:url('icons/quotation.png') no-repeat center center;
+}
+
+.icon-material-planning{
+    background:url('icons/material-planning.png') no-repeat center center;
+}
+
+.icon-return{
+    background:url('icons/return.png') no-repeat center center;
+}
+
+.icon-transfer{
+    background:url('icons/transfer.png') no-repeat center center;
+}
+
+.icon-productionreturn{
+    background:url('icons/productionreturn.png') no-repeat center center;
+}
+
+.icon-make-to-stock{
+    background:url('icons/make-to-stock.png') no-repeat center center;
+}
+
+.icon-material-to-outsource{
+    background:url('icons/material-to-outsource.png') no-repeat center center;
+}
+
+.icon-view_detail_item{
+    background:url('icons/view_detail_item.png') no-repeat center center;
+}
+
+.icon-add2{
+    background:url('icons/add2.png') no-repeat center center;
+}
+
+.icon-add3{
+    background:url('icons/add3.png') no-repeat center center;
+}
+
+.icon-add-others{
+    background:url('icons/add-others.png') no-repeat center center;
+}
+
+.icon-arrow-up{
+    background:url('icons/arrow-up.png') no-repeat center center;
+}
+
+.icon-arrow-down{
+    background:url('icons/arrow-down.png') no-repeat center center;
+}
+
+.icon-generate-barcode{
+    background:url('icons/generate-barcode.png') no-repeat center center;
+}
+
+.icon-print-barcode{
+    background:url('icons/print-barcode.png') no-repeat center center;
+}
+
+.icon-restore{
+    background:url('icons/restore.png') no-repeat center center;
+}
+
+.icon-delete2{
+    background:url('icons/delete2.png') no-repeat center center;
+}
+
+.icon-print-sticker{
+    background:url('icons/print-sticker.png') no-repeat center center;
+}
+
+.icon-download{
+    background:url('icons/download.png') no-repeat center center;
+}
+
+.icon-submit{
+    background:url('icons/submit.png') no-repeat center center;
+}
+
+.icon-purchase-order-editorial{
+    background:url('icons/purchase_order_editorial.png') no-repeat center center;
+}
+
+.icon-commercial-invoice{
+    background:url('icons/commercial-invoice.png') no-repeat center center;
+}

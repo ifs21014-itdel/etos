@@ -1,0 +1,63 @@
+body {
+	background-color: #f5f5f5;
+}
+
+table {
+	background-color: #f5f5f5;
+}
+
+.selected {
+	background-color: #ec971f;
+	/* 	color: red; */
+	font-weight: bold;
+}
+
+.selected-name {
+	background-color: #f5f5f5;
+}
+
+.form-control {
+	height: 25px;
+	padding: 0px;
+	border-radius: 1px;
+}
+
+.table-pos-header {
+	background-color: #f5f5f5 !important;
+}
+
+.table-bg-header {
+	background-color: #f5f5f5 !important;
+}
+
+.table-pos-header>thead>tr>th, .table-pos-header>tbody>tr>th,
+	.table-pos-header>tfoot>tr>th, .table-pos-header>thead>tr>td,
+	.table-pos-header>tbody>tr>td, .table-pos-header>tfoot>tr>td {
+	padding: 2px;
+	border-top: none !important;
+}
+
+.table-pos-header>tbody>tr>td>label {
+	padding-right: 5px;
+	margin-bottom: 0px;
+	font-weight: 500;
+}
+
+.table-active {
+	border: 1px solid #eee;
+	border-left-width: 2px;
+	border-radius: 3px;
+	border-left-color: #ce4844;
+}
+
+.text-align-right {
+	text-align: right;
+}
+
+.row-payment {
+	vertical-align: middle;
+}
+
+.row-payment .label-payment {
+	font-size: 12px !important;
+}

@@ -1,0 +1,97 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 7, 2014, 11:09:20 AM
+    Author     : hp
+*/
+
+*{
+    font-size:11px;
+    font-family:Tahoma,Arial,Helvetica,sans-serif;
+}
+.title{
+    font-size: 18px;
+    font-weight: bold;
+}
+h2{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+h3{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.head_data td{
+    font-size: 12px;
+}
+table.data_table{
+    border-collapse: collapse;
+}
+
+table.data_table thead tr th{
+    background: #dddddd;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+table.data_table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+table.data_table tr:nth-child(odd) {
+    background: #FFF
+}
+
+table.data_table th {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+table.data_table td {
+    padding: 2px;
+    font-size: 8pt;
+}
+
+.data_label{
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+table.data_table2{
+    border-collapse: collapse;
+}
+
+table.data_table2 thead tr th{
+    background: #e0ecff;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/*table.data_table2 tr:nth-child(even) {
+    background: #dbe5f1;
+}
+table.data_table2 tr:nth-child(odd) {
+    background: #FFF
+}*/
+
+table.data_table2 th, table.data_table2 td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+table.data_table td.left_bottom_right_border{
+    border-bottom: 1px #000 solid;
+    border-left: 1px #000 solid;
+    border-right: 1px #000 solid;
+} 
+table.data_table td.bottom_right_border{
+    border-bottom: 1px #000 solid;
+    border-right: 1px #000 solid;
+} 

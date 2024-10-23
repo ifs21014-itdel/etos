@@ -1,0 +1,9 @@
+.td-start,.td-selected{
+    color:#fff
+}
+.td-start{
+    border:1px solid #fff;background-color:red;
+}
+.td-selected{
+    background-color:#3668C4
+}
