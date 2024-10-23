@@ -94,7 +94,7 @@ class model_hot_cold_test_list_excel extends CI_Model {
             
             // Adjust the image size and offsets
             $logo->setHeight(80); // Set the image height
-            $logo->setOffsetX(10); // Adjust horizontal offset
+            $logo->setOffsetX(40); // Adjust horizontal offset
             $logo->setOffsetY(10); // Adjust vertical offset
             
             // Add the logo to the worksheet
@@ -312,118 +312,118 @@ class model_hot_cold_test_list_excel extends CI_Model {
         $this->sheet->getStyle('B30:L35')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
         // Bagian Header "Testing Progress" dimulai dari baris 37
-$this->sheet->setCellValue('B37', 'Testing Progress')->mergeCells('B37:L37');
-$this->sheet->getStyle('B37:L37')->getFont()->setName('Times New Roman')->setSize(14)->setBold(true);
-$this->sheet->getStyle('B37:L37')->applyFromArray(
-    array(
-        'fill' => array(
-            'type' => PHPExcel_Style_Fill::FILL_SOLID,
-            'color' => array('rgb' => 'CCFFCC'), // Warna hijau muda
-        ),
-        'borders' => array(
-            'allborders' => array(
-                'style' => PHPExcel_Style_Border::BORDER_THIN,
-                'color' => array('argb' => 'FF000000'),
-            ),
-        ),
-    )
-);
+        $this->sheet->setCellValue('B37', 'Testing Progress')->mergeCells('B37:L37');
+        $this->sheet->getStyle('B37:L37')->getFont()->setName('Times New Roman')->setSize(14)->setBold(true);
+        $this->sheet->getStyle('B37:L37')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'CCFFCC'), // Warna hijau muda
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('argb' => 'FF000000'),
+                    ),
+                ),
+            )
+        );
 
-// Bagian Cycle (1 sampai 10) dimulai dari kolom B
-$this->sheet->setCellValue('B38', 'Cycle');
-for ($i = 1; $i <= 10; $i++) {
-    $this->sheet->setCellValueByColumnAndRow($i + 1, 38, $i); // Set angka 1-10 di kolom C ke L
-}
-
-// Bagian Status dengan tanda ceklis (√) dan strip (-)
-$this->sheet->setCellValue('B39', 'Status');
-for ($i = 1; $i <= $hot_cold_test_list->cycles; $i++) {
-    $this->sheet->setCellValueByColumnAndRow($i + 1, 39, '√'); // Centang (√) untuk cycle yang sudah selesai
-}
-for ($i = $hot_cold_test_list->cycles + 1; $i <= 10; $i++) {
-    $this->sheet->setCellValueByColumnAndRow($i + 1, 39, '-'); // Strip (-) untuk cycle yang belum selesai
-}
-
-// Menerapkan border ke seluruh bagian Testing Progress
-$this->sheet->getStyle('B38:L39')->applyFromArray($this->border['allBorders']);
-
-// Mengatur teks agar rata tengah secara horizontal dan vertikal
-$this->sheet->getStyle('B38:L39')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-$this->sheet->getStyle('B38:L39')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
-// Bagian Header "Test Result Summary" dimulai dari baris 41
-$this->sheet->setCellValue('B41', 'TEST RESULT SUMMARY')->mergeCells('B41:L41');
-$this->sheet->getStyle('B41:L41')->getFont()->setName('Times New Roman')->setSize(14)->setBold(true);
-$this->sheet->getStyle('B41:L41')->applyFromArray(
-    array(
-        'fill' => array(
-            'type' => PHPExcel_Style_Fill::FILL_SOLID,
-            'color' => array('rgb' => 'CCFFCC'), // Warna hijau muda
-        ),
-        'borders' => array(
-            'allborders' => array(
-                'style' => PHPExcel_Style_Border::BORDER_THIN,
-                'color' => array('argb' => 'FF000000'),
-            ),
-        ),
-    )
-);
-
-// Baris awal untuk gambar
-$row = 42;
-
-foreach ($hot_cold_test_list_detail as $result) {
-    // Merge cells untuk gambar pertama dari B sampai F
-    $this->sheet->mergeCells('B' . $row . ':F' . ($row + 10));
-    // Merge cells untuk gambar kedua dari G sampai L
-    $this->sheet->mergeCells('G' . $row . ':L' . ($row + 10));
-    
-    // Tampilkan gambar pertama
-    if (trim($result->image_file) != "") {
-        $imagePath1 = FCPATH . 'files/hotcoldtest/' . $result->hot_cold_test_list_id . '/' . $result->image_file;
-        if (file_exists($imagePath1)) {
-            $image1 = new PHPExcel_Worksheet_Drawing();
-            $image1->setPath($imagePath1);
-            $image1->setCoordinates('B' . $row);
-            $image1->setHeight(200); // Set the height of the image (lebih besar)
-            $image1->setOffsetX(10); // Adjust offset if necessary
-            $image1->setOffsetY(10); 
-            $image1->setWorksheet($this->sheet);
+        // Bagian Cycle (1 sampai 10) dimulai dari kolom B
+        $this->sheet->setCellValue('B38', 'Cycle');
+        for ($i = 1; $i <= 10; $i++) {
+            $this->sheet->setCellValueByColumnAndRow($i + 1, 38, $i); // Set angka 1-10 di kolom C ke L
         }
-    }
 
-    // Tampilkan gambar kedua
-    if (trim($result->image2_file) != "") {
-        $imagePath2 = FCPATH . 'files/hotcoldtest/' . $result->hot_cold_test_list_id . '/' . $result->image2_file;
-        if (file_exists($imagePath2)) {
-            $image2 = new PHPExcel_Worksheet_Drawing();
-            $image2->setPath($imagePath2);
-            $image2->setCoordinates('G' . $row);
-            $image2->setHeight(200); // Set the height of the image (lebih besar)
-            $image2->setOffsetX(10); // Adjust offset if necessary
-            $image2->setOffsetY(10); 
-            $image2->setWorksheet($this->sheet);
+        // Bagian Status dengan tanda ceklis (√) dan strip (-)
+        $this->sheet->setCellValue('B39', 'Status');
+        for ($i = 1; $i <= $hot_cold_test_list->cycles; $i++) {
+            $this->sheet->setCellValueByColumnAndRow($i + 1, 39, '√'); // Centang (√) untuk cycle yang sudah selesai
         }
-    }
+        for ($i = $hot_cold_test_list->cycles + 1; $i <= 10; $i++) {
+            $this->sheet->setCellValueByColumnAndRow($i + 1, 39, '-'); // Strip (-) untuk cycle yang belum selesai
+        }
 
-    // Apply border di sel gambar pertama dan kedua
-    $this->sheet->getStyle('B' . $row . ':F' . ($row + 10))->applyFromArray($this->border['allBorders']);
-    $this->sheet->getStyle('G' . $row . ':L' . ($row + 10))->applyFromArray($this->border['allBorders']);
+        // Menerapkan border ke seluruh bagian Testing Progress
+        $this->sheet->getStyle('B38:L39')->applyFromArray($this->border['allBorders']);
 
-    // Tampilkan evaluation dan result_test_var di baris selanjutnya
-    $this->sheet->setCellValue('B' . ($row + 11), $result->evaluation)->mergeCells('B' . ($row + 11) . ':F' . ($row + 11));
-    $this->sheet->setCellValue('G' . ($row + 11), $result->result_test_var)->mergeCells('G' . ($row + 11) . ':L' . ($row + 11));
+        // Mengatur teks agar rata tengah secara horizontal dan vertikal
+        $this->sheet->getStyle('B38:L39')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->sheet->getStyle('B38:L39')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
-    // Menerapkan border di bagian evaluation dan result_test_var
-    $this->sheet->getStyle('B' . ($row + 11) . ':L' . ($row + 11))->applyFromArray($this->border['allBorders']);
+        // Bagian Header "Test Result Summary" dimulai dari baris 41
+        $this->sheet->setCellValue('B41', 'TEST RESULT SUMMARY')->mergeCells('B41:L41');
+        $this->sheet->getStyle('B41:L41')->getFont()->setName('Times New Roman')->setSize(14)->setBold(true);
+        $this->sheet->getStyle('B41:L41')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'CCFFCC'), // Warna hijau muda
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('argb' => 'FF000000'),
+                    ),
+                ),
+            )
+        );
 
-    // Pindahkan row untuk iterasi berikutnya
-    $row += 12;
-}
+        // Baris awal untuk gambar
+        $row = 42;
 
-// Mengatur alignment agar teks berada di tengah dan vertikal
-$this->sheet->getStyle('B41:L' . ($row - 1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-$this->sheet->getStyle('B41:L' . ($row - 1))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        foreach ($hot_cold_test_list_detail as $result) {
+            // Merge cells untuk gambar pertama dari B sampai F
+            $this->sheet->mergeCells('B' . $row . ':F' . ($row + 10));
+            // Merge cells untuk gambar kedua dari G sampai L
+            $this->sheet->mergeCells('G' . $row . ':L' . ($row + 10));
+            
+            // Tampilkan gambar pertama
+            if (trim($result->image_file) != "") {
+                $imagePath1 = FCPATH . 'files/hotcoldtest/' . $result->hot_cold_test_list_id . '/' . $result->image_file;
+                if (file_exists($imagePath1)) {
+                    $image1 = new PHPExcel_Worksheet_Drawing();
+                    $image1->setPath($imagePath1);
+                    $image1->setCoordinates('B' . $row);
+                    $image1->setHeight(200); // Set the height of the image (lebih besar)
+                    $image1->setOffsetX(10); // Adjust offset if necessary
+                    $image1->setOffsetY(10); 
+                    $image1->setWorksheet($this->sheet);
+                }
+            }
+
+            // Tampilkan gambar kedua
+            if (trim($result->image2_file) != "") {
+                $imagePath2 = FCPATH . 'files/hotcoldtest/' . $result->hot_cold_test_list_id . '/' . $result->image2_file;
+                if (file_exists($imagePath2)) {
+                    $image2 = new PHPExcel_Worksheet_Drawing();
+                    $image2->setPath($imagePath2);
+                    $image2->setCoordinates('G' . $row);
+                    $image2->setHeight(200); // Set the height of the image (lebih besar)
+                    $image2->setOffsetX(10); // Adjust offset if necessary
+                    $image2->setOffsetY(10); 
+                    $image2->setWorksheet($this->sheet);
+                }
+            }
+
+            // Apply border di sel gambar pertama dan kedua
+            $this->sheet->getStyle('B' . $row . ':F' . ($row + 10))->applyFromArray($this->border['allBorders']);
+            $this->sheet->getStyle('G' . $row . ':L' . ($row + 10))->applyFromArray($this->border['allBorders']);
+
+            // Tampilkan evaluation dan result_test_var di baris selanjutnya
+            $this->sheet->setCellValue('B' . ($row + 11), $result->evaluation)->mergeCells('B' . ($row + 11) . ':F' . ($row + 11));
+            $this->sheet->setCellValue('G' . ($row + 11), $result->result_test_var)->mergeCells('G' . ($row + 11) . ':L' . ($row + 11));
+
+            // Menerapkan border di bagian evaluation dan result_test_var
+            $this->sheet->getStyle('B' . ($row + 11) . ':L' . ($row + 11))->applyFromArray($this->border['allBorders']);
+
+            // Pindahkan row untuk iterasi berikutnya
+            $row += 12;
+        }
+
+        // Mengatur alignment agar teks berada di tengah dan vertikal
+        $this->sheet->getStyle('B41:L' . ($row - 1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->sheet->getStyle('B41:L' . ($row - 1))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
     }
     

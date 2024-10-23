@@ -90,7 +90,7 @@
                 $logo->setHeight(80); // Set the image height (you can adjust this as needed)
                 
                 // Center the image by adjusting the offsets
-                $logo->setOffsetX(25); // Adjust the horizontal offset to center the image (try different values if needed)
+                $logo->setOffsetX(80); // Adjust the horizontal offset to center the image (try different values if needed)
                 $logo->setOffsetY(10); // Adjust the vertical offset to center the image (try different values if needed)
             
                 // Add the logo to the worksheet
@@ -359,77 +359,83 @@
            // Loop through the $hardness_test_list_detail and insert the data into the table
            $row++;
            foreach ($this->hardness_test_list_detail as $detail) {
-            if ($detail->var_type == 'Description') {
-                // Jika var_type adalah 'Description', cetak note di kolom gambar
-                $this->sheet->setCellValue('B' . $row, $detail->method)->mergeCells('B' . $row . ':C' . $row);
-                $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
-                $this->sheet->setCellValue('E' . $row, $detail->notes)->mergeCells('E' . $row . ':F' . $row);
-                $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true); // Font miring untuk note
-
-                // Tambahkan border ke setiap cell
-                $this->sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray($this->border['allBorders']);
-
-                // Pindah ke baris berikutnya
-                $row++;
-            } else {
-                // Jika var_type adalah 'Photo', tambahkan gambar (atau teks No Image)
-                $this->sheet->setCellValue('B' . $row, $detail->method)->mergeCells('B' . $row . ':C' . $row);
-                $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
-
-                // Inisialisasi variabel untuk offset Y dan total tinggi gambar
-                $offsetY = 0;
-                $totalHeight = 150; // Atur tinggi default jika gambar tidak ada
-
-                // Menambahkan gambar pertama (atau No Image)
-                if (trim($detail->image_file) != "") {
-                    $imagePath = FCPATH . 'files/hardnesstest/' . $detail->hardness_test_list_id . '/' . $detail->image_file;
-                    if (file_exists($imagePath)) {
-                        $objDrawing = new PHPExcel_Worksheet_Drawing();
-                        $objDrawing->setPath($imagePath);
-                        $this->sheet->mergeCells('E' . $row . ':F' . $row);
-                        $objDrawing->setCoordinates('E' . $row);
-                        $objDrawing->setHeight(150); // Tinggi gambar yang lebih besar
-                        $objDrawing->setOffsetY($offsetY);
-                        $objDrawing->setWorksheet($this->sheet);
-                    } else {
-                        // Jika gambar tidak ada, cetak teks "No Image"
-                        $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
-                        $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true); // Font miring untuk "No Image"
-                    }
-                } else {
-                    // Jika tidak ada gambar pertama, tambahkan teks "No Image"
-                    $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
-                    $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true);
-                }
-
-                // Menambahkan gambar kedua (atau No Image)
-                if (trim($detail->image2_file) != "") {
-                    $image2Path = FCPATH . 'files/hardnesstest/' . $detail->hardness_test_list_id . '/' . $detail->image2_file;
-                    if (file_exists($image2Path)) {
-                        $objDrawing2 = new PHPExcel_Worksheet_Drawing();
-                        $objDrawing2->setPath($image2Path);
-                        $this->sheet->mergeCells('E' . $row . ':F' . $row);
-                        $objDrawing2->setCoordinates('E' . $row);
-                        $objDrawing2->setHeight(150); // Tinggi gambar yang lebih besar
-                        $objDrawing2->setOffsetY($offsetY);
-                        $objDrawing2->setWorksheet($this->sheet);
-                    } else {
-                        // Jika gambar kedua tidak ada, cetak teks "No Image"
-                        $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
-                        $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true);
-                    }
-                }
-
-                // Menambahkan border ke setiap cell
-                $this->sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray($this->border['allBorders']);
-
-                // Atur tinggi baris sesuai dengan total tinggi gambar atau default tinggi
-                $this->sheet->getRowDimension($row)->setRowHeight($totalHeight);
-
-                // Pindah ke baris berikutnya
-                $row++;
-            }
-        }     
+               if ($detail->var_type == 'Description') {
+                   // Jika var_type adalah 'Description', cetak note di kolom gambar
+                   $this->sheet->setCellValue('B' . $row, $detail->method)->mergeCells('B' . $row . ':C' . $row);
+                   $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
+                   $this->sheet->setCellValue('E' . $row, $detail->notes)->mergeCells('E' . $row . ':F' . $row);
+                   $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true); // Font miring untuk note
+           
+                   // Tambahkan border ke setiap cell
+                   $this->sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray($this->border['allBorders']);
+           
+                   // Pindah ke baris berikutnya
+                   $row++;
+               } else {
+                   // Jika var_type adalah 'Photo', tambahkan gambar (atau teks No Image)
+                   $this->sheet->setCellValue('B' . $row, $detail->method)->mergeCells('B' . $row . ':C' . $row);
+                   $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
+           
+                   // Inisialisasi variabel untuk offset Y dan total tinggi gambar
+                   $offsetY = 0;
+                   $totalHeight = 150; // Atur tinggi default jika gambar tidak ada
+           
+                   // Menambahkan gambar pertama (atau No Image)
+                   if (trim($detail->image_file) != "") {
+                       $imagePath = FCPATH . 'files/hardnesstest/' . $detail->hardness_test_list_id . '/' . $detail->image_file;
+                       if (file_exists($imagePath)) {
+                           $objDrawing = new PHPExcel_Worksheet_Drawing();
+                           $objDrawing->setPath($imagePath);
+                           $this->sheet->mergeCells('E' . $row . ':F' . $row);
+                           $objDrawing->setCoordinates('E' . $row);
+                           $objDrawing->setHeight(150); // Tinggi gambar yang lebih besar
+                           $objDrawing->setOffsetY($offsetY);
+                           $objDrawing->setWorksheet($this->sheet);
+                           $offsetY += 150 + 10; // Tambahkan jarak antar gambar
+                       } else {
+                           // Jika gambar tidak ada, cetak teks "No Image"
+                           $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
+                           $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true); // Font miring untuk "No Image"
+                           $totalHeight = -1; // Tidak ada gambar, jadi tinggi default teks
+                       }
+                   } else {
+                       // Jika tidak ada gambar pertama, tambahkan teks "No Image"
+                       $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
+                       $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true);
+                       $totalHeight = -1; // Tidak ada gambar, jadi tinggi default teks
+                   }
+           
+                   // Menambahkan gambar kedua (atau No Image)
+                   if (trim($detail->image2_file) != "") {
+                       $image2Path = FCPATH . 'files/hardnesstest/' . $detail->hardness_test_list_id . '/' . $detail->image2_file;
+                       if (file_exists($image2Path)) {
+                           $objDrawing2 = new PHPExcel_Worksheet_Drawing();
+                           $objDrawing2->setPath($image2Path);
+                           $this->sheet->mergeCells('E' . $row . ':F' . $row);
+                           $objDrawing2->setCoordinates('E' . $row);
+                           $objDrawing2->setHeight(150); // Tinggi gambar kedua
+                           $objDrawing2->setOffsetY($offsetY); // Menggeser ke bawah
+                           $objDrawing2->setWorksheet($this->sheet);
+                           $offsetY += 150 + 10; // Tambahkan jarak
+                           $totalHeight = $offsetY; // Update tinggi total dengan gambar kedua
+                       } else {
+                           // Jika gambar kedua tidak ada, cetak teks "No Image"
+                           $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
+                           $this->sheet->getStyle('E' . $row)->getFont()->setItalic(true);
+                       }
+                   }
+           
+                   // Menambahkan border ke setiap cell
+                   $this->sheet->getStyle('B' . $row . ':F' . $row)->applyFromArray($this->border['allBorders']);
+           
+                   // Atur tinggi baris sesuai dengan total tinggi gambar atau default tinggi
+                   $this->sheet->getRowDimension($row)->setRowHeight($totalHeight > 0 ? $totalHeight : -1);
+           
+                   // Pindah ke baris berikutnya
+                   $row++;
+               }
+           }
+               
 
         }
 

@@ -90,7 +90,7 @@
                 $logo->setHeight(80); // Set the image height (you can adjust this as needed)
                 
                 // Center the image by adjusting the offsets
-                $logo->setOffsetX(25); // Adjust the horizontal offset to center the image (try different values if needed)
+                $logo->setOffsetX(80); // Adjust the horizontal offset to center the image (try different values if needed)
                 $logo->setOffsetY(10); // Adjust the vertical offset to center the image (try different values if needed)
             
                 // Add the logo to the worksheet
@@ -346,6 +346,7 @@
                    // Inisialisasi tinggi default gambar
                    $imageHeight = 150;
                    $totalHeight = $imageHeight; // Asumsi default bahwa ada gambar
+                   $offsetY = 0; // Untuk mengatur posisi gambar kedua ke bawah
            
                    // Menambahkan gambar pertama (atau No Image)
                    if (trim($detail->image_file) != "") {
@@ -355,8 +356,10 @@
                            $objDrawing->setPath($imagePath);
                            $this->sheet->mergeCells('E' . $row . ':F' . $row);
                            $objDrawing->setCoordinates('E' . $row);
-                           $objDrawing->setHeight($imageHeight); // Tinggi gambar
+                           $objDrawing->setHeight($imageHeight); // Tinggi gambar pertama
+                           $objDrawing->setOffsetY($offsetY); // Mengatur posisi
                            $objDrawing->setWorksheet($this->sheet);
+                           $offsetY += $imageHeight + 10; // Tambahkan jarak antar gambar
                        } else {
                            // Jika gambar tidak ada, cetak teks "No Image"
                            $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
@@ -378,8 +381,11 @@
                            $objDrawing2->setPath($image2Path);
                            $this->sheet->mergeCells('E' . $row . ':F' . $row);
                            $objDrawing2->setCoordinates('E' . $row);
-                           $objDrawing2->setHeight($imageHeight); // Tinggi gambar
+                           $objDrawing2->setHeight($imageHeight); // Tinggi gambar kedua
+                           $objDrawing2->setOffsetY($offsetY); // Menggeser ke bawah
                            $objDrawing2->setWorksheet($this->sheet);
+                           $offsetY += $imageHeight + 10; // Tambahkan jarak
+                           $totalHeight = $offsetY; // Update tinggi total dengan gambar kedua
                        } else {
                            // Jika gambar kedua tidak ada, cetak teks "No Image"
                            $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
@@ -397,6 +403,7 @@
                    $row++;
                }
            }
+           
            
 
 
