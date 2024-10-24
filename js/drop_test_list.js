@@ -80,7 +80,7 @@ function drop_test_list_edit() {
             $('#bodydata').append("<div id='drop_test_list_detail_dialog'></div>");
         }
         $('#drop_test_list_detail_dialog').dialog({
-            title: 'Edit Product',
+            title: 'Edit Drop Test',
             width: 600,
             height: 'auto',
             href: base_url + 'drop_test_list/input',
@@ -101,9 +101,10 @@ function drop_test_list_edit() {
                 }
             }],
             onLoad: function () {
-                $('#drop_test_protocol_id').combobox('setValue', row.protocol_test_id);  
-                $('#drop_test_list_po_item_id').combogrid('setValue', row.purchaseorder_item_id + '#' + row.po_client_no + '#' + row.ebako_code + '#' + row.customer_code + '#' + row.client_id + '#' + row.client_name + '#' + row.product_id); 
-                $('#drop_test_vendor_id').combogrid('setValue', row.vendor_id + "#" + row.vendor_name);  
+                $('#drop_test_protocol_id').combobox('setValue', row.protocol_test_id);   
+                $('#drop_test_vendor_id').combogrid('setValue', row.vendor_id);  
+                $('#drop_test_client_id').combogrid('setValue', row.client_id );  
+                $('#drop_test_product_id').combogrid('setValue', row.product_id ); 
                 $('#drop_test_date').datebox('setValue', row.test_date);  
                 $('#drop_test_report_date').datebox('setValue', row.report_date);  
                 $('#drop_test_report_no').val(row.report_no);  
