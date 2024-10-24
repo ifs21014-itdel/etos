@@ -23,63 +23,75 @@
                     </script>
                 </td>
             </tr>
+            
             <tr>
-                <td width="15%"><strong>PO Item</strong></td>
+                <td><strong>Client</strong></td>
                 <td>
-                    <input type="text" name="purchaseorder_item_id" required="true" id="hardness_test_list_po_item_id" class="easyui-combogrid" style="width:100%;"/>
-                    <script>
-                        $('#hardness_test_list_po_item_id').combogrid({
-                            url: base_url + 'hardness_test_list/get_item_po',
-                            idField: 'valfield',
-                            textField: 'myfield',
+
+                    <input type="text" name="client_id" id="hardness_test_client_id" mode="remote" class="easyui-combogrid" style="width: 100%" required="true"/>
+                    <script type="text/javascript">
+                        $('#hardness_test_client_id').combogrid({
+                            panelWidth: 460,
+                            idField: 'id',
+                            textField: 'name',
                             mode: 'remote',
+                            url: '<?php echo site_url('client/get') ?>',
                             columns: [[
-                                    {field: 'id', title: 'ID', width: 40},
-                                    {field: 'ebako_code', title: 'Ebako Code', align: 'left', width: 120},
-                                    {field: 'customer_code', title: 'Customer Code', align: 'left', width: 120},
-                                    {field: 'client_name', title: 'Client Name', align: 'left', width: 100},
-                                    {field: 'po_client_no', title: 'PO No', align: 'left', width: 180},
-                                    {field: 'description', title: 'Description', align: 'left', width: 120},
+                                    {field: 'id', title: 'ID', width: 60},
+                                    {field: 'code', title: 'COde', width: 150},
+                                    {field: 'name', title: 'Name', width: 180}
                                 ]],
                             onBeforeLoad: function (param) {
                                 param.page = 1;
                                 param.rows = 30;
                             },
-                            loadFilter: function (data) {
-                                if ($.isArray(data)) {
-                                    data = {total: data.length, rows: data};
-                                }
-                                $.map(data.rows, function (row) {
-                                    row.myfield = 'PO No:' + row.po_client_no + ':Ebako Code:' + row.ebako_code + ' Cust Code:' + row.customer_code + ' Clientid:' + row.client_id + ' Client name:' + row.client_name ;
-                                    row.valfield = row.id + '#' + row.po_client_no + '#' + row.ebako_code + '#' + row.customer_code + '#' + row.client_id + '#' + row.client_name+ '#' + row.product_id;
-                                });
-                                return data;
-                            },
-                            onChange: function (data) {}
+                            onChange: function (data) {
+                                //alert(data);
+                            }
                         });
                     </script>
                 </td>
-            </tr>  
-
+            </tr>
             <tr>
-                <td><strong>Brand</strong></td>
-                <td>
-                    <select name="brand" id="hardness_test_brand">
-                        <option value='Frontgate'>Frontgate</option>
-                        <option value='Grandinroad'>Grandinroad</option>
-                    </select>
-                </td>
-            </tr>    
+                <td width="30%"><strong>Product Code </strong></td>
+                <td width="70%">
 
+
+                    <input type="text" name="product_id" id="hardness_test_product_id" mode="remote" class="easyui-combogrid" style="width: 100%" required="true"/>
+                    <script type="text/javascript">
+                        $('#hardness_test_product_id').combogrid({
+                            panelWidth: 460,
+                            idField: 'id',
+                            mode: 'remote',
+                            textField: 'ebako_code',
+                            url: '<?php echo site_url('products/get') ?>',
+                            columns: [[
+                                    {field: 'id', title: 'ID', width: 60},
+                                    {field: 'ebako_code', title: 'Ebako COde', width: 100},
+                                    {field: 'customer_code', title: 'Customer Code', width: 50},
+                                    {field: 'description', title: 'Desc', width: 200}
+                                ]],
+                            onBeforeLoad: function (param) {
+                                param.page = 1;
+                                param.rows = 30;
+                            },
+                            onChange: function (data) {
+                                //alert(data);
+                            }
+                        });
+                    </script>
+                </td>
+            </tr>
             <tr>
                 <td><strong>Vendor</strong></td>
                 <td>
                     <input type="text" name="vendor_id" required="true" id="hardness_test_vendor_id" class="easyui-combogrid" style="width:100%;"/>
                     <script>
+
                         $('#hardness_test_vendor_id').combogrid({
                             url: base_url + 'vendor/get',
-                            idField: 'dt_vendor_val',
-                            textField: 'dt_vendor_text',
+                            idField: 'id',
+                            textField: 'name',
                             mode: 'remote',
                             columns: [[
                                     {field: 'id', title: 'ID', width: 40},
@@ -91,20 +103,23 @@
                                 param.rows = 30;
                             },
                             loadFilter: function (data2) {
+                                // return data.rows;
                                 if ($.isArray(data2)) {
                                     data2 = {total: data2.length, rows: data2};
                                 }
                                 $.map(data2.rows, function (row) {
-                                    row.dt_vendor_text = 'Vendor ID:' + row.id + ':Vendor Name:' + row.name;
-                                    row.dt_vendor_val = row.id + '#' + row.name;
+                                    row.hardness_test_vendor_text = 'Vendor ID:' + row.id + ':Vendor Name:' + row.name;
+                                    row.hardness_test_vendor_val = row.id + '#' + row.name;
                                 });
                                 return data2;
                             },
-                            onChange: function (data2) {}
+                            onChange: function (data2) {
+                                //alert(data);
+                            }
                         });
                     </script>
                 </td>
-            </tr>                      
+            </tr>                    
 
             <tr>
                 <td><strong>Test Date</strong></td>

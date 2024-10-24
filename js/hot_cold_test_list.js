@@ -105,17 +105,13 @@ function hot_cold_test_list_edit() {
                 $('#hot_cold_test_list_detail_tr_component').remove();
 
                 // Set individual form values manually
-                $('#hot_cold_test_protocol_id').combobox('setValue', row.protocol_test_id);
-                $('#hot_cold_test_list_po_item_id').combogrid('setValue', row.purchaseorder_item_id + '#' + row.po_client_no + '#' + row.ebako_code + '#' + row.customer_code + '#' + row.client_id + '#' + row.client_name + '#' + row.product_id); 
-                $('#hot_cold_test_vendor_id').combogrid('setValue', row.vendor_id + "#" + row.vendor_name); 
-                $('#hot_cold_test_brand_id').val(row.brand);
+                $('#hot_cold_test_protocol_id').combobox('setValue', row.protocol_test_id);  
+                $('#hot_cold_test_vendor_id').combogrid('setValue', row.vendor_id);  
+                $('#hot_cold_test_client_id').combogrid('setValue', row.client_id );  
+                $('#hot_cold_test_product_id').combogrid('setValue', row.product_id ); 
                 $('#hot_cold_test_date_id').datebox('setValue', row.test_date);
                 $('#hot_cold_test_report_date_id').datebox('setValue', row.report_date);
                 $('#hot_cold_test_report_no_id').val(row.report_no);
-                $('#hot_cold_test_product_dimension_id').val(row.product_dimension);
-                $('#hot_cold_test_carton_dimension_id').val(row.carton_dimension);
-                $('#hot_cold_test_gross_weight_id').numberbox('setValue', row.gross_weight);
-                $('#hot_cold_test_nett_weight_id').numberbox('setValue', row.nett_weight);
                 $('#hot_cold_test_notes_id').val(row.notes);
                 
                 $('#hot_cold_test_condition_a_temp_id').val(row.condition_a_temp);

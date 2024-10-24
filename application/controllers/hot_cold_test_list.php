@@ -27,19 +27,11 @@ class hot_cold_test_list extends CI_Controller{
     }
 
     function save($id) {
-        $poitem = explode("#", $this->input->post('purchaseorder_item_id'));
-        $vendor = explode("#", $this->input->post('vendor_id'));
         $data_hot_cold_test_list_detail = array(
             "protocol_test_id" => $this->input->post('protocol_test_id') ?: NULL,
-            "purchaseorder_item_id" => $poitem[0] ?: NULL, 
-            "po_client_no" => $poitem[1],
-            "ebako_code" => $poitem[2],
-            "customer_code" => $poitem[3],
-            "client_id" => $poitem[4] ?: NULL, 
-            "client_name" => $poitem[5],
-            "vendor_id" => $vendor[0] ?: NULL, 
-            "vendor_name" => $vendor[1],
-            "product_id" => $poitem[6] ?: NULL, 
+            "client_id" => $this->input->post('client_id'),
+            "vendor_id" =>  $this->input->post('vendor_id'),
+            "product_id" =>  $this->input->post('product_id'),
             "submited" => 'f',
             "test_date" => $this->input->post('test_date') ?: NULL,
             "brand" => $this->input->post('brand'),

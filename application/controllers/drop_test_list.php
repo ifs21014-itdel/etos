@@ -27,25 +27,16 @@ class drop_test_list extends CI_Controller {
     }
 
     function save($id) {
-        $poitem = explode("#", $this->input->post('purchaseorder_item_id'));
-        $vendor = explode("#", $this->input->post('vendor_id'));
         $data_drop_test_list_detail = array(
             "protocol_test_id" => $this->input->post('protocol_test_id'),
-            "purchaseorder_item_id" => $poitem[0],
-            "po_client_no" => $poitem[1],
-            "ebako_code" => $poitem[2],
-            "customer_code" => $poitem[3],
-            "client_id" => $poitem[4],
-            "client_name" => $poitem[5],
-            "vendor_id" => $vendor[0],
-            "vendor_name" => $vendor[1],
-            "product_id" => $poitem[6],
+            "client_id" => $this->input->post('client_id'),
+            "vendor_id" =>  $this->input->post('vendor_id'),
+            "product_id" =>  $this->input->post('product_id'),
             "submited" => 'f',
             "test_date" => $this->input->post('test_date') ?: NULL,
             "carton_dimension" => $this->input->post('carton_dimension'),
             "gross_weight" => $this->input->post('gross_weight') ?: 0,
             "nett_weight" => $this->input->post('nett_weight') ?: 0,
-            "brand" => $this->input->post('brand'),
             "report_date" => $this->input->post('report_date') ?: NULL,
             "product_dimension" => $this->input->post('product_dimension'),
             "report_no" => $this->input->post('report_no'),

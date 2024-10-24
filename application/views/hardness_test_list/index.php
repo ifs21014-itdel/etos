@@ -35,7 +35,7 @@
                 <div id="product_test_result_mm_2" style="width:150px;">
                     <div style="background-color: greenyellow;"onclick="hardness_test_list_submit('Passed')">PASSED</div>
                     <div  style="background-color: #f67c63;" onclick="hardness_test_list_submit('Failed')">FAILED</div>
-                    <div  style="background-color: #ffed55;" onclick="hardness_test_list_submit('Car')">CAR</div>
+                    <div  style="background-color: #ffed55;" onclick="hardness_test_list_submit('N/A')">N/A</div>
                 </div>
 
                 <a href="#" id="hardness_test_list_print_id" class="easyui-menubutton" data-options="menu:'#hardness_test_list_mm_print',iconCls:'icon-print'">Print</a>
@@ -68,8 +68,7 @@
             <thead>
                 <tr>
                     <th field="protocol_name" halign="center">Hardness Test Type</th>
-                    <!-- <th field="brand" halign="center">Brand</th> -->
-                    <th field="po_client_no"  halign="center">Po Number</th>
+                    <th field="client_name"  halign="center">Client</th>
                     <th field="vendor_name"  halign="center">Vendor</th>
                     <th field="ebako_code" halign="center">Ebako Code</th>
                     <th field="customer_code" halign="center">customer_code</th>

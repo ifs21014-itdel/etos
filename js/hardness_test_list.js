@@ -102,8 +102,9 @@ function hardness_test_list_edit() {
             }],
             onLoad: function () {
                 $('#hardness_test_protocol_id').combobox('setValue', row.protocol_test_id);  
-                $('#hardness_test_list_po_item_id').combogrid('setValue', row.purchaseorder_item_id + '#' + row.po_client_no + '#' + row.ebako_code + '#' + row.customer_code + '#' + row.client_id + '#' + row.client_name + '#' + row.product_id); 
-                $('#hardness_test_vendor_id').combogrid('setValue', row.vendor_id + "#" + row.vendor_name);  
+                $('#hardness_test_vendor_id').combogrid('setValue', row.vendor_id);  
+                $('#hardness_test_client_id').combogrid('setValue', row.client_id );  
+                $('#hardness_test_product_id').combogrid('setValue', row.product_id ); 
                 $('#hardness_test_date').datebox('setValue', row.test_date);  
                 $('#hardness_test_report_date').datebox('setValue', row.report_date);  
                 $('#hardness_test_report_no').val(row.report_no);  
