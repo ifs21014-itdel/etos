@@ -79,21 +79,21 @@
             $this->sheet->getDefaultStyle()->getFont()->setName('Times New Roman')->setSize(14);
 
             // Use FCPATH or BASEPATH to get the absolute path
-            $imagePath = FCPATH . 'files/logo.png'; // Assuming 'files' folder is in the root directory of your project
+            $imagePath = FCPATH . 'files/logo.png'; // Asumsi folder 'files' ada di direktori root project Anda
             if (file_exists($imagePath)) {
                 $logo = new PHPExcel_Worksheet_Drawing();
                 $logo->setPath($imagePath); 
                 $this->sheet->mergeCells('B2:B5'); 
-                $logo->setCoordinates('B2'); // Place the image starting at cell B2
+                $logo->setCoordinates('B2'); // Tempatkan gambar mulai dari sel B2
                 
-                // Adjust the image size
-                $logo->setHeight(80); // Set the image height (you can adjust this as needed)
+                // Menyesuaikan ukuran gambar
+                $logo->setHeight(80); // Atur tinggi gambar (sesuaikan jika diperlukan)
                 
-                // Center the image by adjusting the offsets
-                $logo->setOffsetX(25); // Adjust the horizontal offset to center the image (try different values if needed)
-                $logo->setOffsetY(10); // Adjust the vertical offset to center the image (try different values if needed)
-            
-                // Add the logo to the worksheet
+                // Menggeser gambar lebih jauh ke kanan dengan meningkatkan nilai offset X
+                $logo->setOffsetX(80); // Meningkatkan nilai offset horizontal dari 40 ke 60
+                $logo->setOffsetY(10); // Offset vertikal tetap sama
+                
+                // Menambahkan gambar ke worksheet
                 $logo->setWorksheet($this->sheet);
             }
             
@@ -347,6 +347,9 @@
                    $imageHeight = 150;
                    $totalHeight = $imageHeight; // Asumsi default bahwa ada gambar
            
+                   // Offset Y untuk gambar kedua agar tersusun ke bawah
+                   $offsetY = 0;
+           
                    // Menambahkan gambar pertama (atau No Image)
                    if (trim($detail->image_file) != "") {
                        $imagePath = FCPATH . 'files/droptest/' . $detail->drop_test_list_id . '/' . $detail->image_file;
@@ -356,7 +359,9 @@
                            $this->sheet->mergeCells('E' . $row . ':F' . $row);
                            $objDrawing->setCoordinates('E' . $row);
                            $objDrawing->setHeight($imageHeight); // Tinggi gambar
+                           $objDrawing->setOffsetY($offsetY); // Mulai dari atas
                            $objDrawing->setWorksheet($this->sheet);
+                           $offsetY += $imageHeight + 10; // Tambahkan jarak antar gambar
                        } else {
                            // Jika gambar tidak ada, cetak teks "No Image"
                            $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
@@ -378,8 +383,11 @@
                            $objDrawing2->setPath($image2Path);
                            $this->sheet->mergeCells('E' . $row . ':F' . $row);
                            $objDrawing2->setCoordinates('E' . $row);
-                           $objDrawing2->setHeight($imageHeight); // Tinggi gambar
+                           $objDrawing2->setHeight($imageHeight); // Tinggi gambar kedua
+                           $objDrawing2->setOffsetY($offsetY); // Geser ke bawah
                            $objDrawing2->setWorksheet($this->sheet);
+                           $offsetY += $imageHeight + 10; // Tambahkan jarak
+                           $totalHeight = $offsetY; // Update tinggi total dengan gambar kedua
                        } else {
                            // Jika gambar kedua tidak ada, cetak teks "No Image"
                            $this->sheet->setCellValue('E' . $row, 'No Image')->mergeCells('E' . $row . ':F' . $row);
@@ -397,6 +405,7 @@
                    $row++;
                }
            }
+           
            
 
 

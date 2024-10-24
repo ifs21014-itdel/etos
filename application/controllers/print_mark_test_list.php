@@ -445,8 +445,7 @@ class print_mark_test_list extends CI_Controller {
         $data['submited'] = 'TRUE';
         $data['rating'] = $resulst_status;
         $data['report_date'] = date('Y-m-d');
-        // echo 'print_mark_test_list id='.$id.' dan po itemid='.$purchaseorder_item_id;
-        // exit;
+
         $error_message = "";
         if ($this->model_print_mark_test_list->update($data, array("id" => $id))) {
             echo json_encode(array('success' => true));
