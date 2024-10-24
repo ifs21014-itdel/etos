@@ -63,7 +63,7 @@
                             idField: 'id',
                             mode: 'remote',
                             textField: 'ebako_code',
-                            url: '<?php echo site_url('products/get') ?>',
+                            url: '<?php echo site_url('products/get2') ?>',
                             columns: [[
                                     {field: 'id', title: 'ID', width: 60},
                                     {field: 'ebako_code', title: 'Ebako COde', width: 100},

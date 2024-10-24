@@ -21,6 +21,9 @@ class products extends CI_Controller {
     function get($flag = "") {
         echo $this->model_products->get($flag);
     }
+    function get2($flag = "") {
+        echo $this->model_products->get2($flag);
+    }
 
     function input() {
         $this->load->view('products/input');

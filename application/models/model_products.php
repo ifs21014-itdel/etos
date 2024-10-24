@@ -21,8 +21,8 @@ class model_products extends CI_Model {
     function select_query($query) {
         return $this->db->query($query)->result();
     }
-    
-    function get_top_ten_sales(){
+
+    function get_top_ten_sales() {
         $query = "
                 select pro.id,pro.code,pro.name,pro.width,pro.height,pro.depth,count(pro.id) total,pro.volume
                 from product_order_detail prod
@@ -32,7 +32,7 @@ class model_products extends CI_Model {
                 group by pro.id 
                 order by count(pro.id) desc limit 10
         ";
-        
+
         $result = array();
         $data = "";
         $page = $this->input->post('page');
@@ -49,7 +49,7 @@ class model_products extends CI_Model {
         }
         return $data;
     }
-    
+
     function get($flag = "") {
         $query = "
             select t.*,
@@ -74,7 +74,7 @@ class model_products extends CI_Model {
             } else {
                 $order_specification = " $arr_sort[0] $arr_order[0] ";
                 for ($i = 1; $i < count($arr_sort); $i++) {
-                    $order_specification .=", $arr_sort[$i] $arr_order[$i] ";
+                    $order_specification .= ", $arr_sort[$i] $arr_order[$i] ";
                 }
             }
         } else {
@@ -95,15 +95,14 @@ class model_products extends CI_Model {
         if (!empty($code_name)) {
             $query .= " and (t.description ilike '%$code_name%' or t.ebako_code ilike '%$code_name%')";
         }
-        
-        if($flag == "released"){
+
+        if ($flag == "released") {
             $query .= " and t.status = 1 ";
-        }
-        elseif($flag>0){
+        } elseif ($flag > 0) {
             $query .= " and t.client_id = $flag ";
         }
         $query .= "  order by $order_specification";
-       // echo $query;
+        // echo $query;
         //exit;
         $data = "";
         if (!empty($page) && !empty($rows)) {
@@ -115,6 +114,26 @@ class model_products extends CI_Model {
         } else {
             $data = json_encode($this->db->query($query)->result());
         }
+        return $data;
+    }
+
+    function get2($flag = "") {
+        $query = "
+            select t.*,
+            cli.code client_code,
+            cli.name client_name from products t 
+            left join client cli on t.client_id=cli.id where true 
+        ";
+
+        $q = $this->input->post('q');
+        if (!empty($q)) {
+            $query .= " and (t.description ilike '%$q%' or t.ebako_code ilike '%$q%' or t.customer_code ilike '%$q%')";
+        }
+        $query .= "  order by id";
+        // echo $query;
+        //exit;
+        $data = "";
+        $data = json_encode($this->db->query($query)->result());
         return $data;
     }
 
@@ -134,9 +153,10 @@ class model_products extends CI_Model {
     function get_last_id() {
         return $this->db->query('select id from products order by id desc limit 1')->row()->id;
     }
+
     function getbyid($id) {
-        $query="select * from products where id=".$id;
-      //  echo $query;
+        $query = "select * from products where id=" . $id;
+        //  echo $query;
         return $this->db->query($query)->row();
     }
 
@@ -197,10 +217,10 @@ class model_products extends CI_Model {
         $query .= "  order by $order_specification";
         $offset = ($page - 1) * $rows;
         $result = array();
-       // echo $query;
+        // echo $query;
         $result['total'] = $this->db->query($query)->num_rows();
         $query .= " limit $rows offset $offset";
-      //  echo $query;
+        //  echo $query;
         $result = array_merge($result, array('rows' => $this->db->query($query)->result()));
         return json_encode($result);
     }
@@ -216,13 +236,12 @@ class model_products extends CI_Model {
     function box_update($data, $where) {
         return $this->db->update('products_box', $data, $where);
     }
-    function getall(){
-        
+
+    function getall() {
+
         $query = " select p.id,p.ebako_code, p.customer_code, p.packing_configuration,p.description,p.remarks, p.finishing, p.material,c.name "
                 . " from products p LEFT JOIN client c ON p.client_id=c.id where true  ";
         //echo $query;
         return $this->db->query($query)->result();
     }
-
-
 }
