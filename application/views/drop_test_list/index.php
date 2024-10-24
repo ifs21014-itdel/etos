@@ -35,7 +35,7 @@
                 <div id="product_test_result_mm_2" style="width:150px;">
                     <div style="background-color: greenyellow;"onclick="drop_test_list_submit('Passed')">PASSED</div>
                     <div  style="background-color: #f67c63;" onclick="drop_test_list_submit('Failed')">FAILED</div>
-                    <div  style="background-color: #ffed55;" onclick="drop_test_list_submit('Car')">CAR</div>
+                    <div  style="background-color: #ffed55;" onclick="drop_test_list_submit('N/A')">N/A</div>
                 </div>
 
                 <a href="#" id="drop_test_list_print_id" class="easyui-menubutton" data-options="menu:'#drop_test_list_mm_print',iconCls:'icon-print'">Print</a>
