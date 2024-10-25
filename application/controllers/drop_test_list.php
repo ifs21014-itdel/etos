@@ -359,9 +359,12 @@ class drop_test_list extends CI_Controller {
                     if (file_exists($originalPath)) {
                         unlink($originalPath);
                     }
-    
+                   // compress_image($tempPath, $originalPath,50);
+                  //  exit;
                     // Upload file baru ke server
                     if (move_uploaded_file($tempPath, $originalPath)) {
+                        
+                   // if (compress_image($tempPath, $originalPath,50)) {
                         $data_box['image_file'] = $basename; // Simpan nama file di database
                         $data_box['updated_by'] = $this->session->userdata('id');
                         $data_box['updated_at'] = date("Y-m-d H:i:s");

@@ -117,3 +117,18 @@ $autoload['model'] = array('model_user');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
+function compress_image($source, $destination, $quality) {
+    $info = getimagesize($source);
+
+    if ($info['mime'] == 'image/jpeg') {
+        $image = imagecreatefromjpeg($source);  // Membuat gambar dari file JPEG
+        imagejpeg($image, $destination, $quality);  // Kompres gambar JPEG
+    } elseif ($info['mime'] == 'image/png') {
+        $image = imagecreatefrompng($source);  // Membuat gambar dari file PNG
+        // Kualitas PNG berkisar dari 0 (kualitas terbaik) hingga 9 (terburuk)
+        $png_quality = 9 - floor($quality / 10); // Ubah kualitas JPEG (0-100) ke skala PNG (0-9)
+        imagepng($image, $destination, $png_quality);
+    }
+
+    imagedestroy($image);  // Bebaskan memori
+}
