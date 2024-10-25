@@ -1,30 +1,30 @@
 <div style="padding: 1px;">
-        <!--<form id="print_mark_test_list_input_form" method="post" novalidate enctype="multipart/form-data" class="table_form">-->
-        <form id="print_mark_test_list_input_form" method="post" novalidate class="table_form" enctype="multipart/form-data" >
-            <table width="100%" border="0">
+    <!--<form id="print_mark_test_list_input_form" method="post" novalidate enctype="multipart/form-data" class="table_form">-->
+    <form id="print_mark_test_list_input_form" method="post" novalidate class="table_form" enctype="multipart/form-data" >
+        <table width="100%" border="0">
 
-                <tr>
-                    <td width='30%'><strong>Print Mark Test Type</strong></td>
-                    <td>
-                        <input class="easyui-combobox" 
-                            id="print_mark_test_protocol_id"
-                            name="protocol_test_id"
-                            url="<?php echo site_url('protocol_test/get/print') ?>"
-                            method="post"
-                            mode="remote"
-                            valueField="id"
-                            textField="protocol_name"
-                            data-options="formatter: print_mark_test_protocol_format"
-                            style="width: 100%" 
-                            />
-                        <script type="text/javascript">
-                            function print_mark_test_protocol_format(row) {
-                                return '<span style="font-weight:bold;">' + row.protocol_name + ' - ' + row.test_name + '</span>';
-                            }
-                        </script>
-                    </td>
-                </tr>
-                
+            <tr>
+                <td width='30%'><strong>Print Mark Test Type</strong></td>
+                <td>
+                    <input class="easyui-combobox" 
+                           id="print_mark_test_protocol_id"
+                           name="protocol_test_id"
+                           url="<?php echo site_url('protocol_test/get/print') ?>"
+                           method="post"
+                           mode="remote"
+                           valueField="id"
+                           textField="protocol_name"
+                           data-options="formatter: print_mark_test_protocol_format"
+                           style="width: 100%" 
+                           />
+                    <script type="text/javascript">
+                        function print_mark_test_protocol_format(row) {
+                            return '<span style="font-weight:bold;">' + row.protocol_name + ' - ' + row.test_name + '</span>';
+                        }
+                    </script>
+                </td>
+            </tr>
+
             <tr>
                 <td><strong>Client</strong></td>
                 <td>
@@ -121,32 +121,35 @@
                     </script>
                 </td>
             </tr>                    
-                <tr>
-                    <td><strong>Test Date</strong></td>
-                    <td><input name="test_date" class="easyui-datebox" style="width: 50%;" data-options="formatter:myformatter,parser:myparser" style="width: 69%;"></td>
-                </tr>                 
-                <tr>
-                    <td><strong>Report Date</strong></td>
-                    <td><input name="report_date" class="easyui-datebox" style="width: 50%;" data-options="formatter:myformatter,parser:myparser" style="width: 69%;"></td>
-                </tr>  
-                <tr>
-                    <td><strong>Report Number</strong></td>
-                    <td><input name="report_no"  class="easyui-validatebox" style="width: 58%;"/></td>
-                </tr> 
-                <tr>
-                    <td><strong>Notes</strong></td>
-                    <td>
-                        <textarea name="notes" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="25%"><strong>Product Photo</strong></td>
-                    <td width="75%"><input type="file" name="product_image" data-options="prompt:'Pilih File...'" style="width:90%"> </td>
-                </tr>
-                <tr>
-                <td width="25%"><strong>Corrective Action Plan</strong></td>
-                <td width="75%"><input type="file" name="corrective_action_plan_image" data-options="prompt:'Pilih File...'" style="width:90%"> </td>
+            <tr>
+                <td><strong>Test Date</strong></td>
+                <td><input name="test_date" class="easyui-datebox" style="width: 50%;" data-options="formatter:myformatter,parser:myparser" style="width: 69%;"></td>
+            </tr>                 
+            <tr>
+                <td><strong>Report Date</strong></td>
+                <td><input name="report_date" class="easyui-datebox" style="width: 50%;" data-options="formatter:myformatter,parser:myparser" style="width: 69%;"></td>
+            </tr>  
+            <tr>
+                <td><strong>Report Number</strong></td>
+                <td><input name="report_no"  class="easyui-validatebox" style="width: 58%;"/></td>
+            </tr> 
+            <tr>
+                <td><strong>Notes</strong></td>
+                <td>
+                    <textarea name="notes" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
+                </td>
             </tr>
-            </table>
-        </form>
-    </div>
+
+            <tr>
+                <td><strong>Corrective Action Plan</strong></td>
+                <td>
+                    <textarea id="print_mark_test_corrective_action_plan_image" name="corrective_action_plan_image" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td width="25%"><strong>Product Photo</strong></td>
+                <td width="75%"><input type="file" name="product_image" data-options="prompt:'Pilih File...'" style="width:90%"> </td>
+            </tr>
+        </table>
+    </form>
+</div>

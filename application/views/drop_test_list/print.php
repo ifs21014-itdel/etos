@@ -210,13 +210,8 @@
                     <tr>
                         
                         <td height="100" width="500" align="center">
-
                             <?php
-                            if (trim($drop_test_list->product_image) != "") {
-                                $image = $_SERVER["HTTP_REFERER"] . 'files/droptest/' . $drop_test_list->id . "/" . $drop_test_list->corrective_action_plan_image;
-                            // echo $image;
-                                echo "<img src='" . $image . "' width='105' heigth='100'>";
-                            }
+                            echo $drop_test_list->corrective_action_plan_image;
                             ?>
                             </td>
                         

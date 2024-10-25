@@ -168,15 +168,18 @@
                     Duration: <input type="number" name="condition_b_duration" id="hot_cold_test_condition_b_duration_id" style="width: 50px;"> hour
                 </td>
             </tr>
+            
+            <tr>
+                <td><strong>Corrective Action Plan</strong></td>
+                <td>
+                    <textarea id="hot_cold_test_corrective_action_plan_image" name="corrective_action_plan_image" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
+                </td>
+            </tr>
             <tr>
                 <td width="35%"><strong>Room Temperature Rest (B)</strong></td>
                 <td width="65%">
                     Rest Duration: <input type="number" name="room_temp_rest_b_duration" id="hot_cold_test_room_temp_rest_b_duration_id" style="width: 50px;"> minutes
                 </td>
-            </tr>
-            <tr>
-                <td><strong>Total Cycles</strong></td>
-                <td><input type="number" name="cycles" class="easyui-validatebox" id="hot_cold_test_cycles_id" style="width: 98%;height: 35px" min="0" max="10"></td>
             </tr>
         </table>
     </form>

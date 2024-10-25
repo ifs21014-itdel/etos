@@ -378,3 +378,9 @@ ALTER TABLE public.hardness_test_list ADD COLUMN item_description text;
 ALTER TABLE public.product_test_list ADD COLUMN item_description text;
 ALTER TABLE public.hot_cold_test_list ADD COLUMN item_description text;
 ALTER TABLE public.print_mark_test_list ADD COLUMN item_description text;
+
+ALTER TABLE public.drop_test_list ALTER COLUMN corrective_action_plan_image TYPE text;
+ALTER TABLE public.hardness_test_list ALTER COLUMN corrective_action_plan_image TYPE text;
+ALTER TABLE public.product_test_list ALTER COLUMN corrective_action_plan_image TYPE text;
+ALTER TABLE public.hot_cold_test_list ALTER COLUMN corrective_action_plan_image TYPE text;
+ALTER TABLE public.print_mark_test_list ALTER COLUMN corrective_action_plan_image TYPE text;

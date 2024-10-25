@@ -152,13 +152,8 @@
                     <tr>
                         
                         <td height="100" width="500" align="center">
-
                             <?php
-                            if (trim($hardness_test_list->product_image) != "") {
-                                $image = $_SERVER["HTTP_REFERER"] . 'files/hardnesstest/' . $hardness_test_list->id . "/" . $hardness_test_list->corrective_action_plan_image;
-                            // echo $image;
-                                echo "<img src='" . $image . "' width='105' heigth='100'>";
-                            }
+                            echo $hardness_test_list->corrective_action_plan_image;
                             ?>
                             </td>
                         

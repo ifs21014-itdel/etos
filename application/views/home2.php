@@ -25,7 +25,7 @@
         <script src="<?php echo base_url("Highcharts/js/highcharts.js") ?>"></script>
         <script src="<?php echo base_url("Highcharts/js/modules/exporting.js") ?>"></script>
         <script src="<?php echo base_url("Highcharts/js/modules/drilldown.js") ?>"></script>
-    <script src="<?php echo base_url("js/App.js") ?>"></script>
+        <script src="<?php echo base_url("js/App.js") ?>"></script>
         <!--
         <script type="text/javascript" >
             var check_session;

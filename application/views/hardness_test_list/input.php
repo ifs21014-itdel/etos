@@ -142,15 +142,17 @@
                     <textarea name="notes" id="hardness_test_notes" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
                 </td>
             </tr>
+            
+            <tr>
+                <td><strong>Corrective Action Plan</strong></td>
+                <td>
+                    <textarea id="hardness_test_corrective_action_plan_image" name="corrective_action_plan_image" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
+                </td>
+            </tr>
 
             <tr>
                 <td width="25%"><strong>Product Photo</strong></td>
                 <td width="75%"><input type="file" name="product_image" id="hardness_product_image" data-options="prompt:'Pilih File...'" style="width:90%"> </td>
-            </tr>
-
-            <tr>
-                <td width="25%"><strong>Corrective Action Plan</strong></td>
-                <td width="75%"><input type="file" name="corrective_action_plan_image" id="hardness_corrective_action_plan" data-options="prompt:'Pilih File...'" style="width:90%"> </td>
             </tr>
         </table>
     </form>

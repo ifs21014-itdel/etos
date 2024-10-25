@@ -159,13 +159,8 @@
                     <tr>
                         
                         <td height="100" width="500" align="center">
-
                             <?php
-                            if (trim($hot_cold_test_list->product_image) != "") {
-                                $image = $_SERVER["HTTP_REFERER"] . 'files/hotcoldtest/' . $hot_cold_test_list->id . "/" . $hot_cold_test_list->corrective_action_plan_image;
-                            // echo $image;
-                                echo "<img src='" . $image . "' width='105' heigth='100'>";
-                            }
+                            echo $hot_cold_test_list->corrective_action_plan_image;
                             ?>
                             </td>
                         

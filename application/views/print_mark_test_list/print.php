@@ -134,7 +134,7 @@
                             <?php
                             if (trim($print_mark_test_list->product_image) != "") {
                                 $image = $_SERVER["HTTP_REFERER"] . 'files/printmarktest/' . $print_mark_test_list->id . "/" . $print_mark_test_list->product_image;
-                               // echo $image;
+                                // echo $image;
                                 echo "<img src='" . $image . "' width='105' heigth='100'>";
                             }
                             ?>
@@ -150,18 +150,13 @@
                         <th bgcolor='#ffff99' colspan="3">Corrective Action Item</th>
                     </tr>
                     <tr>
-                        
-                        <td height="100" width="500" align="center">
 
+                        <td height="100" width="500" align="center">
                             <?php
-                            if (trim($print_mark_test_list->product_image) != "") {
-                                $image = $_SERVER["HTTP_REFERER"] . 'files/printmarktest/' . $print_mark_test_list->id . "/" . $print_mark_test_list->corrective_action_plan_image;
-                            // echo $image;
-                                echo "<img src='" . $image . "' width='105' heigth='100'>";
-                            }
+                            echo $print_mark_test_list->corrective_action_plan_image;
                             ?>
-                            </td>
-                        
+                        </td>
+
                     </tr>
 
                 </table>
@@ -197,7 +192,7 @@
         </tr>
         <tr>
             <td colspan="7" width="48%">
-            <table  class="table-border-luar-dalam">
+                <table  class="table-border-luar-dalam">
                     <tr>
                         <th bgcolor='#ffff99' colspan="7" align='left'>PRODUCT</th>
                     </tr>
@@ -223,61 +218,63 @@
             <th bgcolor='#ffff99' colspan="7" align="center">TEST RESULT SUMMARY</th>
         </tr>
         <tr>
-    <td colspan="7">
-        <table cellpadding="0" cellspacing="0" width="100%" class="table-border-luar-dalam">
-            <!-- Add table headers -->
-            <thead>
-                <tr>
-                    <th width="33%" align="left">Pencil print_mark</th>
-                    <th width="33%" align="center">Result</th>
-                    <th width="33%" align="center">Picture</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $x = 0;
-                foreach ($print_mark_test_list_detail as $result) {
-                    if ($result->var_type == 'Description') {
-                        continue; // Skip if the type is Description
-                    } else {
-                        ?>
+            <td colspan="7">
+                <table cellpadding="0" cellspacing="0" width="100%" class="table-border-luar-dalam">
+                    <!-- Add table headers -->
+                    <thead>
                         <tr>
-                            <!-- Pencil print_mark -->
-                            <td width="33%" align="left">
-                                <?php echo $result->method; ?>
-                            </td>
-
-                            <!-- Result (we'll assume there's a 'result' field or similar) -->
-                            <td width="33%" align="center">
-                                <?php
-                                if (isset($result->result_test_var) && !empty($result->result_test_var)) {
-                                    echo $result->result_test_var;  // Display the result
-                                } else {
-                                }
-                                ?>
-                            </td>
-
-                            <!-- Picture -->
-                            <td width="33%" align="center">
-                                <?php
-                                if (trim($result->image_file) != "") {
-                                    $image = $_SERVER["HTTP_REFERER"] . 'files/printmarktest/' . $result->print_mark_test_list_id . "/" . $result->image_file;
-                                    echo "<img src='" . $image . "' width='175'>";
-                                } else {
-                                }
-                                ?>
-                            </td>
+                            <th width="33%" align="left">Pencil print_mark</th>
+                            <th width="33%" align="center">Result</th>
+                            <th width="33%" align="center">Picture</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                    }
+                        $x = 0;
+                        foreach ($print_mark_test_list_detail as $result) {
+                            if ($result->var_type == 'Description') {
+                                continue; // Skip if the type is Description
+                            } else {
+                                ?>
+                                <tr>
+                                    <!-- Pencil print_mark -->
+                                    <td width="33%" align="left">
+                                        <?php echo $result->method; ?>
+                                    </td>
 
-                    $x++;
-                }
-                ?>
-            </tbody>
-        </table>
-    </td>
-</tr>
+                                    <!-- Result (we'll assume there's a 'result' field or similar) -->
+                                    <td width="33%" align="center">
+                                        <?php
+                                        if (isset($result->result_test_var) && !empty($result->result_test_var)) {
+                                            echo $result->result_test_var;  // Display the result
+                                        } else {
+                                            
+                                        }
+                                        ?>
+                                    </td>
+
+                                    <!-- Picture -->
+                                    <td width="33%" align="center">
+                                        <?php
+                                        if (trim($result->image_file) != "") {
+                                            $image = $_SERVER["HTTP_REFERER"] . 'files/printmarktest/' . $result->print_mark_test_list_id . "/" . $result->image_file;
+                                            echo "<img src='" . $image . "' width='175'>";
+                                        } else {
+                                            
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+
+                            $x++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
 
     </tbody>
 </table>

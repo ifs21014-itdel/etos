@@ -152,11 +152,7 @@
                     <tr>
                     <td height="100" width="500" align="center">
                         <?php
-                        if (trim($product_test_list->product_image) != "") {
-                            $image = $_SERVER["HTTP_REFERER"] . 'files/producttest/' . $product_test_list->id . "/" . $product_test_list->corrective_action_plan_image;
-                        // echo $image;
-                            echo "<img src='" . $image . "' width='105' heigth='100'>";
-                        }
+                        echo $product_test_list->corrective_action_plan_image;
                         ?>
                     </td>
                     </tr>
