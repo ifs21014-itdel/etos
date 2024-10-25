@@ -219,23 +219,12 @@ class model_hot_cold_test_list_excel extends CI_Model {
             )
         );
 
-        // Cek apakah gambar Corrective Action tersedia
-        $correctiveImagePath = FCPATH . 'files/hotcoldtest/' . $this->hot_cold_test_list->id . '/' . $this->hot_cold_test_list->corrective_action_plan_image;
-        if (file_exists($correctiveImagePath) && !empty($this->hot_cold_test_list->corrective_action_plan_image)) {
-            $correctiveImage = new PHPExcel_Worksheet_Drawing();
-            $correctiveImage->setPath($correctiveImagePath);
-            $correctiveImage->setCoordinates('J13');
-            $correctiveImage->setHeight(150); // Ukuran gambar yang lebih besar
-            $correctiveImage->setOffsetX(20); // Offset X untuk menyesuaikan posisi gambar secara horizontal
-            $correctiveImage->setOffsetY(20); // Offset Y untuk menyesuaikan posisi gambar secara vertikal
-            $correctiveImage->setWorksheet($this->sheet); // Tambahkan gambar ke worksheet
-        } else {
-            // Jika gambar tidak ada, tampilkan teks "No Image"
-            $this->sheet->setCellValue('H13', 'No Image');
-            $this->sheet->getStyle('H13')->getFont()->setItalic(true);
-        }
         $this->sheet->mergeCells('J13:L22');
         $this->sheet->getStyle('J13:L22')->applyFromArray($this->border['allBorders']);
+        $this->sheet->setCellValue('J13' . $row, $this->hot_cold_test_list->corrective_action_plan_image);
+        $this->sheet->getStyle('J13:L22')->getFont()->setItalic(true);
+        $this->sheet->getStyle('J13' . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->sheet->getStyle('J13' . $row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
 
         // Bagian Header "PRODUCT"

@@ -113,6 +113,7 @@ function product_test_list_edit() {
                 $('#product_test_gross_weight').numberbox('setValue', row.gross_weight);  
                 $('#product_test_nett_weight').numberbox('setValue', row.nett_weight);  
                 $('#product_test_notes').val(row.notes);  
+                $('#product_test_corrective_action_plan_image').val(row.corrective_action_plan_image);
                 $(this).dialog('center');
             }
         });

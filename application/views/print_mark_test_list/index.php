@@ -81,7 +81,7 @@
                     <th field="rating" halign="center">Rating/Status</th>
                     <th field="submited" halign="center">Submited</th>
             <th  field="product_image"  valign="center" align=center formatter="showimage_product_test_product_image">Image Product</th>
-            <th  field="corrective_action_plan_image"  valign="center" align=center formatter="showimage_product_test_corrective_action_plan">Corrective Action Plan</th>
+                    <th field="corrective_action_plan_image" halign="center">Corrective Action Plan</th>
                 </tr>
             </thead>
         </table>

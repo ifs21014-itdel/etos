@@ -108,7 +108,8 @@ function print_mark_test_list_edit() {
                 $('#print_mark_test_date').datebox('setValue', row.test_date);  
                 $('#print_mark_test_report_date').datebox('setValue', row.report_date);  
                 $('#print_mark_test_report_no').val(row.report_no);   
-                $('#print_mark_test_notes').val(row.notes);  
+                $('#print_mark_test_notes').val(row.notes);    
+                $('#print_mark_test_corrective_action_plan_image').val(row.corrective_action_plan_image);
                 $(this).dialog('center');
             }
         });

@@ -113,6 +113,7 @@ function hardness_test_list_edit() {
                 $('#hardness_test_gross_weight').numberbox('setValue', row.gross_weight);  
                 $('#hardness_test_nett_weight').numberbox('setValue', row.nett_weight);  
                 $('#hardness_test_notes').val(row.notes);  
+                $('#hardness_test_corrective_action_plan_image').val(row.corrective_action_plan_image);
                 $(this).dialog('center');
             }
         });

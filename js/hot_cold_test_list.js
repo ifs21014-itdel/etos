@@ -121,6 +121,7 @@ function hot_cold_test_list_edit() {
                 $('#hot_cold_test_condition_b_temp_id').val(row.condition_b_temp);
                 $('#hot_cold_test_condition_b_duration_id').val(row.condition_b_duration);
                 $('#hot_cold_test_room_temp_rest_b_duration_id').val(row.room_temp_rest_b_duration);
+                $('#hot_cold_test_corrective_action_plan_image').val(row.corrective_action_plan_image);
                 
                 $('#hot_cold_test_cycles_id').val(row.cycles);
 

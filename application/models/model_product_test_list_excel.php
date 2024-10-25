@@ -287,23 +287,12 @@ class model_product_test_list_excel extends CI_Model {
             )
         );
 
-        // Cek apakah gambar Corrective Action tersedia
-        $correctiveImagePath = FCPATH . 'files/producttest/' . $this->product_test_list->id . '/' . $this->product_test_list->corrective_action_plan_image;
-        if (file_exists($correctiveImagePath) && !empty($this->product_test_list->corrective_action_plan_image)) {
-            $correctiveImage = new PHPExcel_Worksheet_Drawing();
-            $correctiveImage->setPath($correctiveImagePath);
-            $correctiveImage->setCoordinates('E13');
-            $correctiveImage->setHeight(150); // Increase image size
-            $correctiveImage->setOffsetX(50); // Offset X to center image horizontally
-            $correctiveImage->setOffsetY(180); // Offset Y to center image vertically
-            $correctiveImage->setWorksheet($this->sheet); // Add image to worksheet
-        } else {
-            // Jika gambar tidak ada, tampilkan teks "No Image"
-            $this->sheet->setCellValue('E13', 'No Image');
-            $this->sheet->getStyle('E13')->getFont()->setItalic(true);
-        }
         $this->sheet->mergeCells('E13:F20');
         $this->sheet->getStyle('E13:F20')->applyFromArray($this->border['allBorders']);
+        $this->sheet->setCellValue('E13' . $row, $this->product_test_list->corrective_action_plan_image);
+        $this->sheet->getStyle('E13:F20')->getFont()->setItalic(true);
+        $this->sheet->getStyle('E13' . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->sheet->getStyle('E13' . $row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
         
 
