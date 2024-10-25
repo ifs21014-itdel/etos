@@ -247,33 +247,36 @@ class model_drop_test_list_excel extends CI_Model {
             $sampleImage = new PHPExcel_Worksheet_Drawing();
             $sampleImage->setPath($imagePath);
             $sampleImage->setHeight(150); // Tinggi gambar, sesuaikan jika perlu
-            $sampleImage->setCoordinates('B19');
-
-            // Merge cell B19 hingga C25
-            $this->sheet->mergeCells('B19:C25');
-
-            // Menghitung lebar total area merge (B hingga C)
-            $cellWidthB = $this->sheet->getColumnDimension('B')->getWidth();
-            $cellWidthC = $this->sheet->getColumnDimension('C')->getWidth();
-            $totalCellWidth = ($cellWidthB + $cellWidthC) * 5.4; // Konversi poin ke piksel, 1 poin = 5.3 piksel
-            // Menghitung tinggi total area merge (baris 19 hingga 25)
-            $totalCellHeight = 0;
-            for ($row = 19; $row <= 25; $row++) {
-                $totalCellHeight += $this->sheet->getRowDimension($row)->getRowHeight();
-            }
-
-            // Mendapatkan ukuran gambar
-            $imageWidth = $sampleImage->getWidth();
-            $imageHeight = $sampleImage->getHeight();
-
-            // Menghitung offset untuk memposisikan gambar di tengah area merge
-            $offsetX = ($totalCellWidth - $imageWidth) / 2;
-            $offsetY = ($totalCellHeight - $imageHeight) / 2;
-
-            // Menerapkan offset yang sudah dihitung
-            $sampleImage->setOffsetX($offsetX); // Horizontal
-            $sampleImage->setOffsetY($offsetY); // Vertikal
-            // Menambahkan gambar ke worksheet
+//            $sampleImage->setCoordinates('B19');
+//
+//            // Merge cell B19 hingga C25
+//            $this->sheet->mergeCells('B19:C25');
+//
+//            // Menghitung lebar total area merge (B hingga C)
+//            $cellWidthB = $this->sheet->getColumnDimension('B')->getWidth();
+//            $cellWidthC = $this->sheet->getColumnDimension('C')->getWidth();
+//            $totalCellWidth = ($cellWidthB + $cellWidthC) * 5.4; // Konversi poin ke piksel, 1 poin = 5.3 piksel
+//            // Menghitung tinggi total area merge (baris 19 hingga 25)
+//            $totalCellHeight = 0;
+//            for ($row = 19; $row <= 25; $row++) {
+//                $totalCellHeight += $this->sheet->getRowDimension($row)->getRowHeight();
+//            }
+//
+//            // Mendapatkan ukuran gambar
+//            $imageWidth = $sampleImage->getWidth();
+//            $imageHeight = $sampleImage->getHeight();
+//
+//            // Menghitung offset untuk memposisikan gambar di tengah area merge
+//            $offsetX = ($totalCellWidth - $imageWidth) / 2;
+//            $offsetY = ($totalCellHeight - $imageHeight) / 2;
+//
+//            // Menerapkan offset yang sudah dihitung
+//            $sampleImage->setOffsetX($offsetX); // Horizontal
+//            $sampleImage->setOffsetY($offsetY); // Vertikal
+//            // Menambahkan gambar ke worksheet
+            
+            $sampleImage->setOffsetX(20); // Offset X to center image horizontally
+            $sampleImage->setOffsetY(20); // Offset Y to center image vertically
             $sampleImage->setWorksheet($this->sheet);
         } else {
             // Jika gambar tidak ada, tampilkan teks "No Image"
@@ -304,12 +307,13 @@ class model_drop_test_list_excel extends CI_Model {
         );
 
         $this->sheet->mergeCells('E19:F25');
-        $this->sheet->setCellValue('E19' . $row, $this->drop_test_list->corrective_action_plan_image);
         $this->sheet->getStyle('E19:F25')->getFont()->setItalic(true);
         $this->sheet->getStyle('E19:F25')->applyFromArray($this->border['allBorders']);
+        $this->sheet->setCellValue('E19' . $row, $this->drop_test_list->corrective_action_plan_image);
         $this->sheet->getStyle('E19' . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $this->sheet->getStyle('E19' . $row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
+        
         //summary
         $this->sheet->setCellValue('B27', 'Summary')->mergeCells('B27:F27');
         $this->sheet->getStyle('B27:F27')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
