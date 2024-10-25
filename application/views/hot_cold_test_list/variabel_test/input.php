@@ -35,7 +35,7 @@
                         <option value=""></option>
                         <option value="Passed">Passed</option>
                         <option value="Failed">Failed</option>
-                        <option value="Car">Car</option>
+                        <option value="N/A">N/A</option>
                     </select>
                 </td>
             </tr>
