@@ -41,6 +41,7 @@
                 <a href="#" id="drop_test_list_print_id" class="easyui-menubutton" data-options="menu:'#drop_test_list_mm_print',iconCls:'icon-print'">Print</a>
                 <div id="drop_test_list_mm_print" style="width:150px;">
                     <div data-options="iconCls:'icon-view'"  onclick="print_drop_test_list('single', 'view')">View</div>
+                    <div data-options="iconCls:'icon-pdf'"  onclick="print_drop_test_list('single', 'pdf')">PDF</div>
                     <div data-options="iconCls:'icon-xls'" onclick="drop_test_list_excel()">Excel</div>
                 </div>
             </form>

@@ -15,15 +15,8 @@ class Pdf
         $dompdf->set_paper("kwitansi");
         $dompdf->render();
         $dompdf->stream($filename . '.pdf', array('Attachment' => 0));
-        //        if ($stream) {
-        //            $dompdf->stream($filename . ".pdf");
-        //        } else {
-        //            $CI = & get_instance();
-        //            $CI->load->helper("file");
-        //            write_file($filename, $dompdf->output());
-        //        }
     }
-    function pdf_generate_detail_anggota($text, $stream = TRUE)
+    function print_test_to_pdf_2($text, $stream = TRUE)
     {
         require_once("vendor/dompdf/dompdf_config.inc.php");
         spl_autoload_register("DOMPDF_autoload");
@@ -40,5 +33,21 @@ class Pdf
         //$dompdf->load_html_file($text);
         $dompdf->render();
         $dompdf->stream("Detail_Anggota.pdf", array('Attachment' => 0));
+    }
+    
+
+    function print_test_to_pdf($html, $filename, $stream = TRUE)
+    {
+        echo $html;
+//        exit;
+        require_once("dompdf/dompdf_config.inc.php");
+        spl_autoload_register("DOMPDF_autoload");
+        $dompdf = new DOMPDF();
+        ini_set("memory_limit", "256M");
+        $dompdf->load_html($html);
+        $dompdf->set_paper("a4", 'portrait');
+        $dompdf->render();
+        $file_name = $filename . ".pdf";
+        $dompdf->stream($file_name, array('Attachment' => 1));
     }
 }

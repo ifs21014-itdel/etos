@@ -368,30 +368,18 @@ class drop_test_list extends CI_Controller {
     function prints() {
         $jenis_laporan = $this->input->post('jenis_laporan');
         $id = $this->input->post('id');
+        $data['drop_test_list'] = $this->model_drop_test_list->select_by_id($id);
+        $data['drop_test_list_detail'] = $this->model_drop_test_list->drop_test_list_detail_select_by_drop_test_list_detail_id($id);
+        $this->load->view('drop_test_list/print', $data);
+    }
+    function generate_pdf() {
+        $jenis_laporan = $this->input->post('jenis_laporan');
+        $id = $this->input->post('id');
         $this->load->library('pdf');
         $data['drop_test_list'] = $this->model_drop_test_list->select_by_id($id);
         $data['drop_test_list_detail'] = $this->model_drop_test_list->drop_test_list_detail_select_by_drop_test_list_detail_id($id);
-        //--------- UNtuk EXCEL ----
-        /*
-          header("Content-Type: application/vnd.ms-excel; charset=UTF-8");
-          header("Content-Disposition: inline; filename=\"drop_test_list.xls\"");
-          header("Pragma: no-cache");
-          header("Expires: 0");
-         */
-
-        //--------- UNtuk WORD ----
-        //    header("Content-Type: application/vnd.ms-word; charset=UTF-8");
-        //   header("Content-Disposition: inline; filename=\"drop_test_list.doc\"");
-        //    header("Pragma: no-cache");
-        //    header("Expires: 0");
-        if ($jenis_laporan == 'excel') {
-
-            header("Content-Type: application/vnd.ms-excel; charset=UTF-8");
-            header("Content-Disposition: inline; filename=\"drop_test_list.xls\"");
-            header("Pragma: no-cache");
-            header("Expires: 0");
-        }
-        $this->load->view('drop_test_list/print', $data);
+        $html=$this->load->view('drop_test_list/print_pdf', $data, TRUE);
+        $this->pdf->print_test_to_pdf($html, 'drop_test');
     }
 
     function excel() {
