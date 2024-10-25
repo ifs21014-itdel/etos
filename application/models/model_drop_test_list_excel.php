@@ -247,10 +247,8 @@ class model_drop_test_list_excel extends CI_Model {
             $sampleImage = new PHPExcel_Worksheet_Drawing();
             $sampleImage->setPath($imagePath);
             $sampleImage->setHeight(150); // Tinggi gambar, sesuaikan jika perlu
-//            $sampleImage->setCoordinates('B19');
+            $sampleImage->setCoordinates('B19');
 //
-//            // Merge cell B19 hingga C25
-//            $this->sheet->mergeCells('B19:C25');
 //
 //            // Menghitung lebar total area merge (B hingga C)
 //            $cellWidthB = $this->sheet->getColumnDimension('B')->getWidth();
@@ -274,7 +272,7 @@ class model_drop_test_list_excel extends CI_Model {
 //            $sampleImage->setOffsetX($offsetX); // Horizontal
 //            $sampleImage->setOffsetY($offsetY); // Vertikal
 //            // Menambahkan gambar ke worksheet
-            
+
             $sampleImage->setOffsetX(20); // Offset X to center image horizontally
             $sampleImage->setOffsetY(20); // Offset Y to center image vertically
             $sampleImage->setWorksheet($this->sheet);
@@ -282,10 +280,10 @@ class model_drop_test_list_excel extends CI_Model {
             // Jika gambar tidak ada, tampilkan teks "No Image"
             $this->sheet->setCellValue('B19', 'No Image');
             $this->sheet->getStyle('B19')->getFont()->setItalic(true);
-            $this->sheet->mergeCells('B19:C25');
-            $this->sheet->getStyle('B19:C25')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $this->sheet->getStyle('B19:C25')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         }
+            $this->sheet->mergeCells('B19:C25');
+        $this->sheet->getStyle('B19:C25')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->sheet->getStyle('B19:C25')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         $this->sheet->getStyle('B19:C25')->applyFromArray($this->border['allBorders']);
 
         // Bagian untuk Corrective Action Item
@@ -313,7 +311,6 @@ class model_drop_test_list_excel extends CI_Model {
         $this->sheet->getStyle('E19' . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $this->sheet->getStyle('E19' . $row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
-        
         //summary
         $this->sheet->setCellValue('B27', 'Summary')->mergeCells('B27:F27');
         $this->sheet->getStyle('B27:F27')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
