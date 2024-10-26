@@ -258,7 +258,7 @@ class model_product_test_list_excel extends CI_Model {
             $sampleImage->setPath($imagePath);
             $sampleImage->setCoordinates('B13');
             $sampleImage->setHeight(150); 
-            $sampleImage->setOffsetX(50); // Offset X to center image horizontally
+            $sampleImage->setOffsetX(200); // Offset X to center image horizontally
             $sampleImage->setOffsetY(180); // Offset Y to center image vertically
             $sampleImage->setWorksheet($this->sheet); // Add image to worksheet
         } else {
@@ -356,7 +356,7 @@ foreach ($this->product_test_list_detail as $detail) {
         $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
 
         // Inisialisasi variabel untuk offset Y dan total tinggi gambar
-        $offsetY = 0;
+        $offsetY = 30;
         $totalHeight = 0;
         $imageHeight = 150; // Tinggi gambar
         $imageSpacing = 10; // Jarak antar gambar
@@ -377,6 +377,7 @@ foreach ($this->product_test_list_detail as $detail) {
                 $objDrawing->setCoordinates('E' . $row);
                 $objDrawing->setHeight($imageHeight);
                 $objDrawing->setOffsetY($offsetY);
+                $objDrawing->setOffsetX(200);
                 $objDrawing->setWorksheet($this->sheet);
                 $offsetY += $imageHeight + $imageSpacing;
                 $totalHeight += $imageHeight + $imageSpacing;
@@ -395,6 +396,7 @@ foreach ($this->product_test_list_detail as $detail) {
                 $objDrawing2->setCoordinates('E' . $row);
                 $objDrawing2->setHeight($imageHeight);
                 $objDrawing2->setOffsetY($offsetY);
+                $objDrawing2->setOffsetX(200);
                 $objDrawing2->setWorksheet($this->sheet);
                 $offsetY += $imageHeight + $imageSpacing;
                 $totalHeight += $imageHeight + $imageSpacing;
@@ -413,6 +415,7 @@ foreach ($this->product_test_list_detail as $detail) {
                 $objDrawing3->setCoordinates('E' . $row);
                 $objDrawing3->setHeight($imageHeight);
                 $objDrawing3->setOffsetY($offsetY);
+                $objDrawing3->setOffsetX(200);
                 $objDrawing3->setWorksheet($this->sheet);
                 $totalHeight += $imageHeight + $imageSpacing;
                 $imageCount++;
