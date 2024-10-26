@@ -41,6 +41,7 @@
                 <a href="#" id="hardness_test_list_print_id" class="easyui-menubutton" data-options="menu:'#hardness_test_list_mm_print',iconCls:'icon-print'">Print</a>
                 <div id="hardness_test_list_mm_print" style="width:150px;">
                     <div data-options="iconCls:'icon-view'"  onclick="print_hardness_test_list('single', 'view')">View</div>
+                    <div data-options="iconCls:'icon-pdf'"  onclick="print_hardness_test_list('single', 'pdf')">PDF</div>
                     <div data-options="iconCls:'icon-xls'"  onclick="hardness_test_list_excel()">Excel</div>
                 </div>
             </form>
@@ -81,7 +82,7 @@
                     <th field="rating" halign="center">Rating/Status</th>
                     <th field="submited" halign="center">Submited</th>
             <th  field="product_image"  valign="center" align=center formatter="showimage_product_test_product_image">Image Product</th>
-            <th  field="corrective_action_plan_image"  valign="center" align=center formatter="showimage_product_test_corrective_action_plan">Corrective Action Plan</th>
+            <!-- <th  field="corrective_action_plan_image"  valign="center" align=center formatter="showimage_product_test_corrective_action_plan">Corrective Action Plan</th> -->
                 </tr>
             </thead>
         </table>
@@ -139,18 +140,18 @@
                 }
                 return temp;
             }
-            function showimage_product_test_corrective_action_plan(value, row) {
-                var idrow = row.id;
-                var temp = '';
-                // Periksa apakah `corrective_action_plan_image` ada dan tidak kosong
-                if (row.corrective_action_plan_image == null || row.corrective_action_plan_image === '') {
-                    temp = ''; // Tidak menampilkan apa-apa jika tidak ada gambar
-                } else {
-                    // Sesuaikan direktori penyimpanan untuk gambar corrective action plan
-                    temp = "<img src='files/hardnesstest/" + row.id +"/" + row.corrective_action_plan_image + "' width=90 height=90 onclick='hardness_test_list_variabel_test_view_detail(" + idrow + ")'>";
-                }
-                return temp;
-            }
+            // function showimage_product_test_corrective_action_plan(value, row) {
+            //     var idrow = row.id;
+            //     var temp = '';
+            //     // Periksa apakah `corrective_action_plan_image` ada dan tidak kosong
+            //     if (row.corrective_action_plan_image == null || row.corrective_action_plan_image === '') {
+            //         temp = ''; // Tidak menampilkan apa-apa jika tidak ada gambar
+            //     } else {
+            //         // Sesuaikan direktori penyimpanan untuk gambar corrective action plan
+            //         temp = "<img src='files/hardnesstest/" + row.id +"/" + row.corrective_action_plan_image + "' width=90 height=90 onclick='hardness_test_list_variabel_test_view_detail(" + idrow + ")'>";
+            //     }
+            //     return temp;
+            // }
         </script>
     </div>
     <div region="south" 

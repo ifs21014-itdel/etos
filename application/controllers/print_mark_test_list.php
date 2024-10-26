@@ -372,6 +372,17 @@ class print_mark_test_list extends CI_Controller {
         $this->load->view('print_mark_test_list/print', $data);
     }
 
+    function generate_pdf() {
+        $jenis_laporan = $this->input->post('jenis_laporan');
+        $id = $this->input->post('id');
+        $this->load->library('pdf');
+        $data['print_mark_test_list'] = $this->model_print_mark_test_list->select_by_id($id);
+        $data['print_mark_test_list_detail'] = $this->model_print_mark_test_list->print_mark_test_list_detail_select_by_print_mark_test_list_detail_id($id);
+        $html=$this->load->view('print_mark_test_list/print_pdf', $data, TRUE);
+        $this->pdf->print_test_to_pdf($html, 'print_mark_test');
+    }
+
+
     function excel() {
         $this->load->model('model_print_mark_test_list_excel');
         

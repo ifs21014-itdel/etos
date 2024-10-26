@@ -419,6 +419,17 @@ class hot_cold_test_list extends CI_Controller{
         $this->load->view('hot_cold_test_list/print', $data);
     }
 
+    function generate_pdf() {
+        $jenis_laporan = $this->input->post('jenis_laporan');
+        $id = $this->input->post('id');
+        $this->load->library('pdf');
+        $data['hot_cold_test_list'] = $this->model_hot_cold_test_list->select_by_id($id);
+        $data['hot_cold_test_list_detail'] = $this->model_hot_cold_test_list->hot_cold_test_list_detail_select_by_hot_cold_test_list_detail_id($id);
+        $html=$this->load->view('hot_cold_test_list/print_pdf', $data, TRUE);
+        $this->pdf->print_test_to_pdf($html, 'hot_cold_test');
+    }
+
+
     function excel() {
         $this->load->model('model_hot_cold_test_list_excel');
         

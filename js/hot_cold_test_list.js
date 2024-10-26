@@ -510,10 +510,10 @@ function hot_cold_test_list_submit(result_status) {
 function print_hot_cold_test_list(type,view_type) {
     var row = $('#hot_cold_test_list').datagrid('getSelected');
     if (row !== null) {
-        if (type === 'single')
+        if (view_type === 'view')
             open_target('POST', base_url + 'hot_cold_test_list/prints', {id: row.id,jenis_laporan:view_type}, '_blank');
         else
-            open_target('POST', base_url + 'hot_cold_test_list/prints', {id: row.id,jenis_laporan:view_type}, '_blank');
+            open_target('POST', base_url + 'hot_cold_test_list/generate_pdf', {id: row.id,jenis_laporan:view_type}, '_blank');
     } else {
         $.messager.alert('No Inspection List Selected', 'Please Select Inspection List', 'warning');
     }

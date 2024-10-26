@@ -244,7 +244,7 @@ class model_hardness_test_list_excel extends CI_Model {
             $sampleImage->setPath($imagePath);
             $sampleImage->setCoordinates('B13');
             $sampleImage->setHeight(150); // Increase image size
-            $sampleImage->setOffsetX(20); // Offset X to center image horizontally
+            $sampleImage->setOffsetX(200); // Offset X to center image horizontally
             $sampleImage->setOffsetY(20); // Offset Y to center image vertically
             $sampleImage->setWorksheet($this->sheet); // Add image to worksheet
         } else {
@@ -353,7 +353,7 @@ class model_hardness_test_list_excel extends CI_Model {
                 $this->sheet->setCellValue('D' . $row, $detail->result_test_var);
 
                 // Inisialisasi variabel untuk offset Y dan total tinggi gambar
-                $offsetY = 0;
+                $offsetY = 30;
                 $totalHeight = 150; // Atur tinggi default jika gambar tidak ada
                 // Menambahkan gambar pertama (atau No Image)
                 if (trim($detail->image_file) != "") {
@@ -365,6 +365,7 @@ class model_hardness_test_list_excel extends CI_Model {
                         $objDrawing->setCoordinates('E' . $row);
                         $objDrawing->setHeight(150); // Tinggi gambar yang lebih besar
                         $objDrawing->setOffsetY($offsetY);
+                        $objDrawing->setOffsetX(200); // Mulai dari atas
                         $objDrawing->setWorksheet($this->sheet);
                         $offsetY += 150 + 10; // Tambahkan jarak antar gambar
                     } else {

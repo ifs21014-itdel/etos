@@ -461,6 +461,17 @@ class hardness_test_list extends CI_Controller{
         $this->load->view('hardness_test_list/print', $data);
     }
 
+    function generate_pdf() {
+        $jenis_laporan = $this->input->post('jenis_laporan');
+        $id = $this->input->post('id');
+        $this->load->library('pdf');
+        $data['hardness_test_list'] = $this->model_hardness_test_list->select_by_id($id);
+        $data['hardness_test_list_detail'] = $this->model_hardness_test_list->hardness_test_list_detail_select_by_hardness_test_list_detail_id($id);
+        $html=$this->load->view('hardness_test_list/print_pdf', $data, TRUE);
+        $this->pdf->print_test_to_pdf($html, 'hardness_test');
+    }
+
+
     function print_summary() {
         $id = $this->input->post('id');
         $this->load->library('pdf');

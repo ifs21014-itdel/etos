@@ -190,7 +190,7 @@ class model_hot_cold_test_list_excel extends CI_Model {
             $sampleImage->setPath($imagePath);
             $sampleImage->setCoordinates('B13');
             $sampleImage->setHeight(150); 
-            $sampleImage->setOffsetX(20); // Offset X untuk menyesuaikan posisi gambar secara horizontal
+            $sampleImage->setOffsetX(200); // Offset X untuk menyesuaikan posisi gambar secara horizontal
             $sampleImage->setOffsetY(20); // Offset Y untuk menyesuaikan posisi gambar secara vertikal
             $sampleImage->setWorksheet($this->sheet); // Tambahkan gambar ke worksheet
         } else {
@@ -375,7 +375,7 @@ class model_hot_cold_test_list_excel extends CI_Model {
                     $image1->setPath($imagePath1);
                     $image1->setCoordinates('B' . $row);
                     $image1->setHeight(200); // Set the height of the image (lebih besar)
-                    $image1->setOffsetX(10); // Adjust offset if necessary
+                    $image1->setOffsetX(200); // Adjust offset if necessary
                     $image1->setOffsetY(10); 
                     $image1->setWorksheet($this->sheet);
                 }

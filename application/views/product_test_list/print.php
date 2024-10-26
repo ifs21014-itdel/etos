@@ -1,17 +1,8 @@
 <?php
-////echo phpinfo();
-////exit();
-//$my_pdf = new Pdf();
-//$my_pdf->setPageOrientation('P', true, 2);
-//$my_pdf->SetCompression(true);
-//$my_pdf->setPrintHeader(true);
-//$my_pdf->setPrintFooter(false);
-//$my_pdf->SetMargins(2, 2, 2);
-//$my_pdf->SetFont('', '', 7);
-//$my_pdf->AddPage();
+
 ?>
 <?php
-//var_dump($product_test_list);
+
 ?>
 <head>
     <style>

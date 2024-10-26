@@ -248,8 +248,8 @@ class model_print_mark_test_list_excel extends CI_Model {
             $sampleImage->setPath($imagePath);
             $sampleImage->setCoordinates('B19');
             $sampleImage->setHeight(150); // Increase image size
-            $sampleImage->setOffsetX(20); // Offset X to center image horizontally
-            $sampleImage->setOffsetY(20); // Offset Y to center image vertically
+            $sampleImage->setOffsetX(200); // Offset X to center image horizontally
+            $sampleImage->setOffsetY(10); // Offset Y to center image vertically
             $sampleImage->setWorksheet($this->sheet); // Add image to worksheet
         } else {
             // Jika gambar tidak ada, tampilkan teks "No Image"
@@ -362,7 +362,8 @@ class model_print_mark_test_list_excel extends CI_Model {
                         $this->sheet->mergeCells('E' . $row . ':F' . $row);
                         $objDrawing2->setCoordinates('E' . $row);
                         $objDrawing2->setHeight($imageHeight); // Tinggi gambar kedua
-                        $objDrawing2->setOffsetY($offsetY); // Menggeser ke bawah
+                        $objDrawing2->setOffsetY($offsetY); 
+                        $objDrawing2->setOffsetX(200); // Menggeser ke bawah
                         $objDrawing2->setWorksheet($this->sheet);
                         $offsetY += $imageHeight + 10; // Tambahkan jarak
                         $totalHeight = $offsetY; // Update tinggi total dengan gambar kedua

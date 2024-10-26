@@ -84,7 +84,7 @@
                     <th field="rating" halign="center">Rating/Status</th>
                     <th field="submited" halign="center">Submited</th>
             <th  field="product_image"  valign="center" align=center formatter="showimage_product_test_product_image">Image Product</th>
-            <th  field="corrective_action_plan_image"  valign="center" align=center formatter="showimage_product_test_corrective_action_plan_image">Corrective Action Plan Image</th>
+            <!-- <th  field="corrective_action_plan_image"  valign="center" align=center formatter="showimage_product_test_corrective_action_plan_image">Corrective Action Plan Image</th> -->
                 </tr>
             </thead>
         </table>
@@ -142,19 +142,19 @@
                 }
                 return temp;
             }
-            function showimage_product_test_corrective_action_plan_image(value, row) {
-                var idrow = row.id;
-                var temp = '';
-                //alert(row.drop_test_list_id);
-                if (row.corrective_action_plan_image == null)
-                    var temp = '';
-                else {
-                    //var temp=row.image_file;
-                    temp = "<img src='files/droptest/" + row.id +"/" + row.corrective_action_plan_image + "' width=90 height=90 onclick='drop_test_list_variabel_test_view_detail(" + idrow + ")'>";
-                    //var temp = "<img src='files/producttest/" + row.drop_test_list_id + "/" + row.image_file + "' width=50>" + row.image_file;
-                }
-                return temp;
-            }
+            // function showimage_product_test_corrective_action_plan_image(value, row) {
+            //     var idrow = row.id;
+            //     var temp = '';
+            //     //alert(row.drop_test_list_id);
+            //     if (row.corrective_action_plan_image == null)
+            //         var temp = '';
+            //     else {
+            //         //var temp=row.image_file;
+            //         temp = "<img src='files/droptest/" + row.id +"/" + row.corrective_action_plan_image + "' width=90 height=90 onclick='drop_test_list_variabel_test_view_detail(" + idrow + ")'>";
+            //         //var temp = "<img src='files/producttest/" + row.drop_test_list_id + "/" + row.image_file + "' width=50>" + row.image_file;
+            //     }
+            //     return temp;
+            // }
         </script>
     </div>
 

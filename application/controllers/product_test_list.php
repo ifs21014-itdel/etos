@@ -413,6 +413,16 @@ class product_test_list extends CI_Controller {
         $this->load->view('product_test_list/print', $data);
     }
 
+    function generate_pdf() {
+        $jenis_laporan = $this->input->post('jenis_laporan');
+        $id = $this->input->post('id');
+        $this->load->library('pdf');
+        $data['product_test_list'] = $this->model_product_test_list->select_by_id($id);
+        $data['product_test_list_detail'] = $this->model_product_test_list->product_test_list_detail_select_by_product_test_list_detail_id($id);
+        $html=$this->load->view('product_test_list/print_pdf', $data, TRUE);
+        $this->pdf->print_test_to_pdf($html, 'product_test');
+    }
+
     function excel() {
         $this->load->model('model_product_test_list_excel');
         
