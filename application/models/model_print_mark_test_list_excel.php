@@ -327,7 +327,7 @@ class model_print_mark_test_list_excel extends CI_Model {
                 // Inisialisasi tinggi default gambar
                 $imageHeight = 150;
                 $totalHeight = $imageHeight; // Asumsi default bahwa ada gambar
-                $offsetY = 0; // Untuk mengatur posisi gambar kedua ke bawah
+                $offsetY = 10; // Untuk mengatur posisi gambar kedua ke bawah
                 // Menambahkan gambar pertama (atau No Image)
                 if (trim($detail->image_file) != "") {
                     $imagePath = FCPATH . 'files/printmarktest/' . $detail->print_mark_test_list_id . '/' . $detail->image_file;
@@ -338,6 +338,7 @@ class model_print_mark_test_list_excel extends CI_Model {
                         $objDrawing->setCoordinates('E' . $row);
                         $objDrawing->setHeight($imageHeight); // Tinggi gambar pertama
                         $objDrawing->setOffsetY($offsetY); // Mengatur posisi
+                        $objDrawing->setOffsetX(200); 
                         $objDrawing->setWorksheet($this->sheet);
                         $offsetY += $imageHeight + 10; // Tambahkan jarak antar gambar
                     } else {
