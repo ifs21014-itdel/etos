@@ -356,6 +356,8 @@ class drop_test_list extends CI_Controller {
         $data['submited'] = 'TRUE';
         $data['rating'] = $resulst_status;
         $data['report_date'] = date('Y-m-d');
+//        var_dump($data);
+//        exit;
         // echo 'drop_test_list id='.$id.' dan po itemid='.$purchaseorder_item_id;
         // exit;
         $error_message = "";

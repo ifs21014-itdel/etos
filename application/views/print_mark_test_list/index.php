@@ -35,7 +35,7 @@
                 <div id="product_test_result_mm_2" style="width:150px;">
                     <div style="background-color: greenyellow;"onclick="print_mark_test_list_submit('Passed')">PASSED</div>
                     <div  style="background-color: #f67c63;" onclick="print_mark_test_list_submit('Failed')">FAILED</div>
-                    <div  style="background-color: #ffed55;" onclick="print_mark_test_list_submit('CAR')">CAR</div>
+                    <div  style="background-color: #ffed55;" onclick="print_mark_test_list_submit('Car')">CAR</div>
                 </div>
 
                 <a href="#" id="print_mark_test_list_print_id" class="easyui-menubutton" data-options="menu:'#print_mark_test_list_mm_print',iconCls:'icon-print'">Print</a>
