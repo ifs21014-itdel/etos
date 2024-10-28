@@ -36,11 +36,11 @@
     <body>
         <table border="1" align="center"  width="100%">
             <tr>
-                <td width="34%">
+                <th width="34%">
                     <img src="<?php echo $_SERVER['HTTP_REFERER'] . 'files/logo.png'; ?>" width="100">
-                </td>
-                <td width="32%"><h3>TEST REPORT</h3></td>
-                <td width="34%"><b>Quality Assurance Department</b></td>
+                </th>
+                <th width="32%" align="center"><h3>TEST REPORT</h3></th>
+                <th width="34%"><b>Quality Assurance Department</b></th>
             </tr>
         </table><br/>
         <table border="1" align="center"  width="100%">
@@ -195,40 +195,39 @@
                 </td>
             </tr>
         </table><br/>
+                <!--Test Result Summary--> 
         <table border="1" align="center"  width="100%">
-            <!--Test Result Summary--> 
-            <caption>TEST RESULT SUMMARY</caption>
             <tr>
-                <td>
-                    <table width="100%" >
-                        <?php
-                        foreach ($drop_test_list_detail as $result) {
-                            if ($result->var_type != 'Description') {
-                                ?>
-                                <tr>
-                                    <td width="40%"><?php echo $result->method; ?></td>
-                                    <td width="10%" align="center"><?php echo $result->result_test_var; ?></td>
-                                    <td style="vertical-align: middle; text-align: center;">
-                                        <?php if (trim($result->image_file) != "") { ?>
-                                            <img src="<?php echo $_SERVER["HTTP_REFERER"] . 'files/droptest/' . $result->drop_test_list_id . "/" . $result->image_file; ?>" style="max-width:50%; height:auto;">
-                                        <?php } ?>
-                                    </td>
-                                </tr> 
-                                <?php
-                            } else {
-                                ?>
-                                <tr>
-                                    <td width="40%"><?php echo $result->method; ?></td>
-                                    <td width="10%"><?php echo $result->result_test_var; ?></td>
-                                    <td width="50%"><?php echo $result->image_file; ?></td>
-                                </tr> 
-                                <?php
-                            }
-                        }
+            <table width="100%" >
+                <caption>TEST RESULT SUMMARY</caption>
+                <?php
+                foreach ($drop_test_list_detail as $result) {
+                    if ($result->var_type != 'Description') {
                         ?>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </body>
+                        <tr>
+                            <td width="40%"><?php echo $result->method; ?></td>
+                            <td width="10%" align="center"><?php echo $result->result_test_var; ?></td>
+                            <td style="vertical-align: middle; text-align: center;">
+                                <?php if (trim($result->image_file) != "") { ?>
+                                    <img src="<?php echo $_SERVER["HTTP_REFERER"] . 'files/droptest/' . $result->drop_test_list_id . "/" . $result->image_file; ?>" style="max-width:50%; height:auto;">
+                                <?php } ?>
+                            </td>
+                        </tr> 
+                        <?php
+                    } else {
+                        ?>
+                        <tr>
+                            <td width="40%"><?php echo $result->method; ?></td>
+                            <td width="10%"><?php echo $result->result_test_var; ?></td>
+                            <td width="50%"><?php echo $result->image_file; ?></td>
+                        </tr> 
+                        <?php
+                    }
+                }
+                ?>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
 </html>

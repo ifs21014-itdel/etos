@@ -288,8 +288,3 @@
         </tr>
     </tbody>
 </table>
-<?php
-//$my_pdf->writeHTML($tbl, true, false, true, false, '');
-//$file_name = $shipment->shipment_no . '.pdf';
-//$my_pdf->Output($file_name, 'D');
-?>
