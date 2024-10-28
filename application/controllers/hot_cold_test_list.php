@@ -26,6 +26,25 @@ class hot_cold_test_list extends CI_Controller{
         $this->load->view('hot_cold_test_list/input');
     }
 
+    function compress_image($tempPath, $originalPath, $imageType) {
+        $compressed = false;
+        $imageType = strtolower($imageType);
+    
+        if ($imageType === 'jpg' || $imageType === 'jpeg') {
+            $image = imagecreatefromjpeg($tempPath);
+            $compressed = imagejpeg($image, $originalPath, 40); // Quality 40
+        } elseif ($imageType === 'png') {
+            $image = imagecreatefrompng($tempPath);
+            $compressed = imagepng($image, $originalPath, 2); // Compression level 2
+        }
+    
+        if (isset($image)) {
+            imagedestroy($image); // Free up memory
+        }
+    
+        return $compressed;
+    }
+
     function save($id) {
         $data_hot_cold_test_list_detail = array(
             "protocol_test_id" => $this->input->post('protocol_test_id') ?: NULL,
@@ -47,66 +66,55 @@ class hot_cold_test_list extends CI_Controller{
             "room_temp_rest_b_duration" => $this->input->post('room_temp_rest_b_duration') ?: NULL,
             "cycles" => $this->input->post('cycles') ?: NULL, // Pastikan ini integer
         );
-        
-//        print_r($data_hot_cold_test_list_detail);
-        //print_r($data_hot_cold_test_list_detail);
+    
         $nametemp_product = 'product_image';
-        $id_dir=$id;
-        if($id==0){
-            
+        $id_dir = $id;
+    
+        if ($id == 0) {
             $maxid = $this->model_hot_cold_test_list->get_hot_cold_test_list_max_id();
             $id_dir = 1 + $maxid[0]->max_id;
         }
+    
         if (isset($_FILES[$nametemp_product]['name'])) {
             $directory = 'files/hotcoldtest/' . $id_dir;
-
+    
             if (!file_exists($directory)) {
                 $oldumask = umask(0);
                 mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
                 umask($oldumask);
             }
+    
             $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
-
-            if (isset($_FILES[$nametemp_product]['name'])) {
-                $imageName = $_FILES[$nametemp_product]['name'];
-                $tempPath = $_FILES[$nametemp_product]["tmp_name"];
-                $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-                $basename = 'product_image-' . $id_dir. '.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath = $directory . '/' . $basename;
-
-                if (in_array($imageType, $allowedImageType)) {
-                    if (file_exists($originalPath)) {
-                        // Hapus file lama
-                        unlink($originalPath);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath, $originalPath)) {
-                        $data_hot_cold_test_list_detail['product_image'] = $basename;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
+            $imageName = $_FILES[$nametemp_product]['name'];
+            $tempPath = $_FILES[$nametemp_product]["tmp_name"];
+            $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
+            $basename = 'product_image-' . $id_dir . '.' . $imageType;
+            $originalPath = $directory . '/' . $basename;
+    
+            if (in_array(strtolower($imageType), $allowedImageType)) {
+                // Kompres dan simpan gambar menggunakan compress_image
+                $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+    
+                if ($compressed) {
+                    $data_hot_cold_test_list_detail['product_image'] = $basename;
+                } else {
+                    echo 'Image not uploaded! Try again';
+                    exit();
                 }
             }
         }
+    
         if ($id == 0) {
             $data_hot_cold_test_list_detail['created_by'] = $this->session->userdata('id');
-            // var_dump($data_hot_cold_test_list_detail);
-            //exit;
             if ($this->model_hot_cold_test_list->insert($data_hot_cold_test_list_detail)) {
                 echo json_encode(array('success' => true));
             } else {
                 echo json_encode(array('msg' => $this->db->_error_message()));
             }
         } else {
-
             $data_hot_cold_test_list_detail['updated_by'] = $this->session->userdata('id');
             $data_hot_cold_test_list_detail['updated_at'] = "now()";
             if ($this->model_hot_cold_test_list->update($data_hot_cold_test_list_detail, array("id" => $id))) {
-        //                if ($last_file_name != 'no-image.jpg') {
-        //                    //@unlink('./files/hot_cold_test_list_image/' . $last_file_name);
-        //                }
                 echo json_encode(array('success' => true));
             } else {
                 echo json_encode(array('msg' => $this->db->_error_message()));
@@ -160,85 +168,51 @@ class hot_cold_test_list extends CI_Controller{
             'mandatory' => 't',
             'var_type' => 'Photo'
         );
-        $nametemp = 'image_file';
-        $nametemp2 = 'image2_file';
-        $nametemp3 = 'image3_file';
-        if (isset($_FILES[$nametemp]['name']) || isset($_FILES[$nametemp2]['name']) || isset($_FILES[$nametemp3]['name'])) {
-            $directory = 'files/hotcoldtest/' . $hot_cold_test_list_id;
-
-            if (!file_exists($directory)) {
-                $oldumask = umask(0);
-                mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
-                umask($oldumask);
-            }
-            $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
-
-            if (isset($_FILES[$nametemp]['name'])) {
-                $imageName = $_FILES[$nametemp]['name'];
-                $tempPath = $_FILES[$nametemp]["tmp_name"];
+    
+        $directory = 'files/hotcoldtest/' . $hot_cold_test_list_id;
+    
+        if (!file_exists($directory)) {
+            $oldumask = umask(0);
+            mkdir($directory, 0777);
+            umask($oldumask);
+        }
+    
+        $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
+        $imageFields = [
+            'image_file' => 'image-1',
+            'image2_file' => 'image-2',
+            'image3_file' => 'image-3'
+        ];
+    
+        foreach ($imageFields as $field => $suffix) {
+            if (isset($_FILES[$field]['name']) && !empty($_FILES[$field]['name'])) {
+                $imageName = $_FILES[$field]['name'];
+                $tempPath = $_FILES[$field]["tmp_name"];
                 $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-                $basename = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-1.' . $imageType; // 5dab1961e93a7_1571494241.jpg
+                $basename = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-' . $suffix . '.' . $imageType;
                 $originalPath = $directory . '/' . $basename;
-
-                if (in_array($imageType, $allowedImageType)) {
+    
+                if (in_array(strtolower($imageType), $allowedImageType)) {
                     if (file_exists($originalPath)) {
-                        // Hapus file lama
-                        unlink($originalPath);
+                        unlink($originalPath); // Hapus file lama jika ada
                     }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath, $originalPath)) {
-                        $data_box['image_file'] = $basename;
+    
+                    // Kompres dan simpan gambar menggunakan compress_image
+                    $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+    
+                    if ($compressed) {
+                        $data_box[$field] = $basename;
                     } else {
-                        echo 'image 1 Not uploaded ! try again';
+                        echo "$field not uploaded! Try again.";
                         exit();
                     }
-                }
-            }
-
-            if (isset($_FILES[$nametemp2]['name'])) {
-                $imageName2 = $_FILES[$nametemp2]['name'];
-                $tempPath2 = $_FILES[$nametemp2]["tmp_name"];
-                $imageType2 = pathinfo($imageName2, PATHINFO_EXTENSION);
-                $basename2 = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-2.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath2 = $directory . '/' . $basename2;
-
-                if (in_array($imageType2, $allowedImageType)) {
-                    if (file_exists($originalPath2)) {
-                        // Hapus file lama
-                        unlink($originalPath2);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath2, $originalPath2)) {
-                        $data_box['image2_file'] = $basename2;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
-                }
-            }
-            if (isset($_FILES[$nametemp3]['name'])) {
-                $imageName3 = $_FILES[$nametemp3]['name'];
-                $tempPath3 = $_FILES[$nametemp3]["tmp_name"];
-                $imageType3 = pathinfo($imageName3, PATHINFO_EXTENSION);
-                $basename3 = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-3.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath3 = $directory . '/' . $basename3;
-
-                if (in_array($imageType3, $allowedImageType)) {
-                    if (file_exists($originalPath3)) {
-                        // Hapus file lama
-                        unlink($originalPath3);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath3, $originalPath3)) {
-                        $data_box['image2_file'] = $basename3;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
+                } else {
+                    echo "Invalid image file type for $field.";
+                    exit();
                 }
             }
         }
+    
         if ($id == 0) {
             $data_box['created_by'] = $this->session->userdata('id');
             if ($this->model_hot_cold_test_list->hot_cold_test_list_detail_insert($data_box)) {
@@ -256,6 +230,8 @@ class hot_cold_test_list extends CI_Controller{
             }
         }
     }
+    
+    
     
     
 
@@ -295,92 +271,55 @@ class hot_cold_test_list extends CI_Controller{
     }
 
     function variabel_test_save($hot_cold_test_list_id, $id) {
-
         $data_box = array(
             'result_test_var' => $this->input->post('result_test_var'),
             'notes' => $this->input->post('notes')
         );
-        $nametemp = 'image_file';
-        $nametemp2 = 'image2_file';
-        $nametemp3 = 'image3_file';
-        if (isset($_FILES[$nametemp]['name']) || isset($_FILES[$nametemp2]['name']) || isset($_FILES[$nametemp3]['name'])) {
-            $directory = 'files/hotcoldtest/' . $hot_cold_test_list_id;
-
-            if (!file_exists($directory)) {
-                $oldumask = umask(0);
-                mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
-                umask($oldumask);
-            }
-            $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
-
-            if (isset($_FILES[$nametemp]['name'])) {
-                $imageName = $_FILES[$nametemp]['name'];
-                $tempPath = $_FILES[$nametemp]["tmp_name"];
+    
+        $directory = 'files/hotcoldtest/' . $hot_cold_test_list_id;
+    
+        if (!file_exists($directory)) {
+            $oldumask = umask(0);
+            mkdir($directory, 0777); 
+            umask($oldumask);
+        }
+    
+        $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
+        $imageFields = [
+            'image_file' => 'image-1',
+            'image2_file' => 'image-2',
+            'image3_file' => 'image-3'
+        ];
+    
+        foreach ($imageFields as $field => $suffix) {
+            if (isset($_FILES[$field]['name']) && !empty($_FILES[$field]['name'])) {
+                $imageName = $_FILES[$field]['name'];
+                $tempPath = $_FILES[$field]["tmp_name"];
                 $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-                $basename = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-1.' . $imageType; // 5dab1961e93a7_1571494241.jpg
+                $basename = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-' . $suffix . '.' . $imageType;
                 $originalPath = $directory . '/' . $basename;
-
-                //var_dump($originalPath);
-                if (in_array($imageType, $allowedImageType)) {
+    
+                if (in_array(strtolower($imageType), $allowedImageType)) {
                     if (file_exists($originalPath)) {
-                        // Hapus file lama
-                        unlink($originalPath);
+                        unlink($originalPath); // Hapus file lama jika ada
                     }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath, $originalPath)) {
-                        $data_box['image_file'] = $basename;
+    
+                    // Kompres dan simpan gambar menggunakan compress_image
+                    $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+    
+                    if ($compressed) {
+                        $data_box[$field] = $basename; // Simpan nama file di database
                     } else {
-                        echo 'image 1 Not uploaded ! try again';
+                        echo "$field not uploaded! Try again.";
                         exit();
                     }
-                }
-            }
-
-            if (isset($_FILES[$nametemp2]['name'])) {
-                $imageName2 = $_FILES[$nametemp2]['name'];
-                $tempPath2 = $_FILES[$nametemp2]["tmp_name"];
-                $imageType2 = pathinfo($imageName2, PATHINFO_EXTENSION);
-                $basename2 = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-2.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath2 = $directory . '/' . $basename2;
-
-                if (in_array($imageType2, $allowedImageType)) {
-                    if (file_exists($originalPath2)) {
-                        // Hapus file lama
-                        unlink($originalPath2);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath2, $originalPath2)) {
-                        $data_box['image2_file'] = $basename2;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
-                }
-            }
-            if (isset($_FILES[$nametemp3]['name'])) {
-                $imageName3 = $_FILES[$nametemp3]['name'];
-                $tempPath3 = $_FILES[$nametemp3]["tmp_name"];
-                $imageType3 = pathinfo($imageName3, PATHINFO_EXTENSION);
-                $basename3 = 'pt-' . $id . '-vt-' . $hot_cold_test_list_id . '-image-3.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath3 = $directory . '/' . $basename3;
-
-                if (in_array($imageType3, $allowedImageType)) {
-                    if (file_exists($originalPath3)) {
-                        // Hapus file lama
-                        unlink($originalPath3);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath3, $originalPath3)) {
-                        $data_box['image3_file'] = $basename3;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
+                } else {
+                    echo "Invalid image file type for $field.";
+                    exit();
                 }
             }
         }
-
+    
         $data_box['updated_by'] = $this->session->userdata('id');
         $data_box['updated_at'] = date("Y-m-d H:i:s");
         if ($this->model_hot_cold_test_list->hot_cold_test_list_detail_update($data_box, array("id" => $id))) {
@@ -389,7 +328,8 @@ class hot_cold_test_list extends CI_Controller{
             echo json_encode(array('msg' => $this->db->_error_message()));
         }
     }
-
+    
+    
     function prints() {
         $jenis_laporan = $this->input->post('jenis_laporan');
         $id = $this->input->post('id');
