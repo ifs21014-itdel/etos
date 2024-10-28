@@ -36,11 +36,11 @@
     <body>
         <table border="1" align="center"  width="100%">
             <tr>
-                <td width="34%">
+                <th width="34%">
                     <img src="<?php echo $_SERVER['HTTP_REFERER'] . 'files/logo.png'; ?>" width="100">
-                </td>
-                <td width="32%"><h3>TEST REPORT</h3></td>
-                <td width="34%"><b>Quality Assurance Department</b></td>
+                </th>
+                <th width="32%" align="center"><h3>TEST REPORT</h3></th>
+                <th width="34%"><b>Quality Assurance Department</b></th>
             </tr>
         </table><br/>
         <table border="1" align="center"  width="100%">

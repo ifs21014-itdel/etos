@@ -16,26 +16,6 @@ class Pdf
         $dompdf->render();
         $dompdf->stream($filename . '.pdf', array('Attachment' => 0));
     }
-    function print_test_to_pdf_2($text, $stream = TRUE)
-    {
-        require_once("vendor/dompdf/dompdf_config.inc.php");
-        spl_autoload_register("DOMPDF_autoload");
-
-        $options['paper_orientation'] = "portrait";
-        $options['paper_size'] = "a4";
-
-        $paper_size = $options['paper_size'];
-        $paper_orientation = $options['paper_orientation'];
-
-        $dompdf = new DOMPDF();
-        $dompdf->set_paper($paper_size, $paper_orientation);
-        $dompdf->load_html($text);
-        //$dompdf->load_html_file($text);
-        $dompdf->render();
-        $dompdf->stream("Detail_Anggota.pdf", array('Attachment' => 0));
-    }
-    
-
     function print_test_to_pdf($html, $filename, $stream = TRUE)
     {
 //        echo $html;
