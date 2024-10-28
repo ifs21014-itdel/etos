@@ -140,8 +140,10 @@
                 <td width="75%"><input type="file" name="product_image" id="hot_cold_test_product_image_id" data-options="prompt:'Pilih File...'" style="width:90%"></td>
             </tr>
             <tr>
-                <td width="25%"><strong>Corrective Action Plan</strong></td>
-                <td width="75%"><input type="file" name="corrective_action_plan_image" id="hot_cold_test_corrective_action_plan_image_id" data-options="prompt:'Pilih File...'" style="width:90%"></td>
+                <td><strong>Corrective Action Plan</strong></td>
+                <td>
+                    <textarea id="hot_cold_test_corrective_action_plan_image" name="corrective_action_plan_image" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" style="background-color: #e8f5e9;">
@@ -169,18 +171,20 @@
                 </td>
             </tr>
             
-            <tr>
-                <td><strong>Corrective Action Plan</strong></td>
-                <td>
-                    <textarea id="hot_cold_test_corrective_action_plan_image" name="corrective_action_plan_image" class="easyui-validatebox" style="width: 98%;height: 35px"></textarea>
-                </td>
-            </tr>
+            
             <tr>
                 <td width="35%"><strong>Room Temperature Rest (B)</strong></td>
                 <td width="65%">
                     Rest Duration: <input type="number" name="room_temp_rest_b_duration" id="hot_cold_test_room_temp_rest_b_duration_id" style="width: 50px;"> minutes
                 </td>
             </tr>
+            <tr>
+                <td><strong>Cycles</strong></td>
+                <td>
+                    <input type="number" id="hot_cold_test_cycles" name="cycles" min="0" max="10" class="easyui-validatebox" style="width: 98%; height: 35px">
+                </td>
+            </tr>
+
         </table>
     </form>
 </div>

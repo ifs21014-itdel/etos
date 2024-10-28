@@ -26,88 +26,102 @@ class print_mark_test_list extends CI_Controller {
         $this->load->view('print_mark_test_list/input');
     }
 
+    function compress_image($tempPath, $originalPath, $imageType) {
+        $compressed = false;
+        $imageType = strtolower($imageType);
+    
+        if ($imageType === 'jpg' || $imageType === 'jpeg') {
+            $image = imagecreatefromjpeg($tempPath);
+            $compressed = imagejpeg($image, $originalPath, 40); // Quality 40
+        } elseif ($imageType === 'png') {
+            $image = imagecreatefrompng($tempPath);
+            $compressed = imagepng($image, $originalPath, 2); // Compression level 2
+        }
+    
+        if (isset($image)) {
+            imagedestroy($image); // Free up memory
+        }
+    
+        return $compressed;
+    }
+
     function save($id) {
-        $data_print_mark_test_list_detail = array(
-            "protocol_test_id" => $this->input->post('protocol_test_id'),
-            "client_id" => $this->input->post('client_id'),
-            "vendor_id" =>  $this->input->post('vendor_id'),
-            "product_id" =>  $this->input->post('product_id'),
-            "submited" => 'f',
-            "test_date" => $this->input->post('test_date') ?: NULL,
-            "carton_dimension" => $this->input->post('carton_dimension'),
-            "gross_weight" => $this->input->post('gross_weight') ?: 0,
-            "nett_weight" => $this->input->post('nett_weight') ?: 0,
-            "brand" => $this->input->post('brand'),
-            "report_date" => $this->input->post('report_date') ?: NULL,
-            "product_dimension" => $this->input->post('product_dimension'),
-            "report_no" => $this->input->post('report_no'),
-            "corrective_action_plan_image" => $this->input->post('corrective_action_plan_image'),
-            "notes" => $this->input->post('notes')
-        );
-       //print_r($data_print_mark_test_list_detail);
-        $nametemp_product = 'product_image';
-        $id_dir=$id;
-        if($id==0){
-            
-            $maxid = $this->model_print_mark_test_list->get_print_mark_test_list_max_id();
-            $id_dir = 1 + $maxid[0]->max_id;
+    $data_print_mark_test_list_detail = array(
+        "protocol_test_id" => $this->input->post('protocol_test_id'),
+        "client_id" => $this->input->post('client_id'),
+        "vendor_id" =>  $this->input->post('vendor_id'),
+        "product_id" =>  $this->input->post('product_id'),
+        "submited" => 'f',
+        "test_date" => $this->input->post('test_date') ?: NULL,
+        "carton_dimension" => $this->input->post('carton_dimension'),
+        "gross_weight" => $this->input->post('gross_weight') ?: 0,
+        "nett_weight" => $this->input->post('nett_weight') ?: 0,
+        "brand" => $this->input->post('brand'),
+        "report_date" => $this->input->post('report_date') ?: NULL,
+        "product_dimension" => $this->input->post('product_dimension'),
+        "report_no" => $this->input->post('report_no'),
+        "corrective_action_plan_image" => $this->input->post('corrective_action_plan_image'),
+        "notes" => $this->input->post('notes')
+    );
+
+    $nametemp_product = 'product_image';
+    $id_dir = $id;
+
+    if ($id == 0) {
+        $maxid = $this->model_print_mark_test_list->get_print_mark_test_list_max_id();
+        $id_dir = 1 + $maxid[0]->max_id;
+    }
+
+    if (isset($_FILES[$nametemp_product]['name'])) {
+        $directory = 'files/printmarktest/' . $id_dir;
+
+        if (!file_exists($directory)) {
+            $oldumask = umask(0);
+            mkdir($directory, 0777);
+            umask($oldumask);
         }
-        if (isset($_FILES[$nametemp_product]['name'])) {
-            $directory = 'files/printmarktest/' . $id_dir;
 
-            if (!file_exists($directory)) {
-                $oldumask = umask(0);
-                mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
-                umask($oldumask);
+        $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
+        $imageName = $_FILES[$nametemp_product]['name'];
+        $tempPath = $_FILES[$nametemp_product]["tmp_name"];
+        $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
+        $basename = 'product_image-' . $id_dir . '.' . $imageType;
+        $originalPath = $directory . '/' . $basename;
+
+        if (in_array(strtolower($imageType), $allowedImageType)) {
+            if (file_exists($originalPath)) {
+                unlink($originalPath); // Hapus file lama jika ada
             }
-            $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
 
-            if (isset($_FILES[$nametemp_product]['name'])) {
-                $imageName = $_FILES[$nametemp_product]['name'];
-                $tempPath = $_FILES[$nametemp_product]["tmp_name"];
-                $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-                $basename = 'product_image-' . $id_dir. '.' . $imageType; // 5dab1961e93a7_1571494241.jpg
-                $originalPath = $directory . '/' . $basename;
+            // Kompres dan simpan gambar menggunakan compress_image
+            $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
 
-                if (in_array($imageType, $allowedImageType)) {
-                    if (file_exists($originalPath)) {
-                        // Hapus file lama
-                        unlink($originalPath);
-                    }
-                    // Upload file to server 
-                    if (move_uploaded_file($tempPath, $originalPath)) {
-                        $data_print_mark_test_list_detail['product_image'] = $basename;
-                    } else {
-                        echo 'image 1 Not uploaded ! try again';
-                        exit();
-                    }
-                }
-            }
-        }
-        if ($id == 0) {
-            $data_print_mark_test_list_detail['created_by'] = $this->session->userdata('id');
-            // var_dump($data_print_mark_test_list_detail);
-            //exit;
-            if ($this->model_print_mark_test_list->insert($data_print_mark_test_list_detail)) {
-                echo json_encode(array('success' => true));
+            if ($compressed) {
+                $data_print_mark_test_list_detail['product_image'] = $basename;
             } else {
-                echo json_encode(array('msg' => $this->db->_error_message()));
-            }
-        } else {
-
-            $data_print_mark_test_list_detail['updated_by'] = $this->session->userdata('id');
-            $data_print_mark_test_list_detail['updated_at'] = "now()";
-            if ($this->model_print_mark_test_list->update($data_print_mark_test_list_detail, array("id" => $id))) {
-        //                if ($last_file_name != 'no-image.jpg') {
-        //                    //@unlink('./files/print_mark_test_list_image/' . $last_file_name);
-        //                }
-                echo json_encode(array('success' => true));
-            } else {
-                echo json_encode(array('msg' => $this->db->_error_message()));
+                echo 'Image not uploaded! Try again.';
+                exit();
             }
         }
     }
+
+    if ($id == 0) {
+        $data_print_mark_test_list_detail['created_by'] = $this->session->userdata('id');
+        if ($this->model_print_mark_test_list->insert($data_print_mark_test_list_detail)) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => $this->db->_error_message()));
+        }
+    } else {
+        $data_print_mark_test_list_detail['updated_by'] = $this->session->userdata('id');
+        $data_print_mark_test_list_detail['updated_at'] = "now()";
+        if ($this->model_print_mark_test_list->update($data_print_mark_test_list_detail, array("id" => $id))) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => $this->db->_error_message()));
+        }
+    }
+}
 
 
     function update_status() {
@@ -191,28 +205,30 @@ class print_mark_test_list extends CI_Controller {
             'var_type' => $this->input->post('var_type')
         );
         $nametemp = 'image_file';
+    
         if (isset($_FILES[$nametemp]['name'])) {
             $directory = 'files/printmarktest/' . $print_mark_test_list_id;
-
+    
             if (!file_exists($directory)) {
                 $oldumask = umask(0);
-                mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
+                mkdir($directory, 0777); 
                 umask($oldumask);
             }
+    
             $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
             $imageName = $_FILES[$nametemp]['name'];
             $tempPath = $_FILES[$nametemp]["tmp_name"];
-            //$basename = basename($imageName);
-
             $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-
-            $basename = 'dt-' . $id . '-vt-' . $print_mark_test_list_id . '-image-1.' . $imageType; // 5dab1961e93a7_1571494241.jpg
+            $basename = 'dt-' . $id . '-vt-' . $print_mark_test_list_id . '-image-1.' . $imageType;
             $originalPath = $directory . '/' . $basename;
-            if (in_array($imageType, $allowedImageType)) {
-                // Upload file to server 
-                if (move_uploaded_file($tempPath, $originalPath)) {
+    
+            if (in_array(strtolower($imageType), $allowedImageType)) {
+                // Kompres dan upload gambar menggunakan compress_image
+                $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+    
+                if ($compressed) {
                     $data_box['image_file'] = $basename;
+    
                     if ($id == 0) {
                         $data_box['created_by'] = $this->session->userdata('id');
                         if ($this->model_print_mark_test_list->print_mark_test_list_detail_insert($data_box)) {
@@ -230,7 +246,7 @@ class print_mark_test_list extends CI_Controller {
                         }
                     }
                 } else {
-                    echo 'image Not uploaded ! try again';
+                    echo 'Image not uploaded! Try again.';
                 }
             } else {
                 if ($id == 0) {
@@ -289,52 +305,56 @@ class print_mark_test_list extends CI_Controller {
     }
 
     function variabel_test_save($print_mark_test_list_id, $id) {
-
         $data_box = array(
             'result_test_var' => $this->input->post('result_test_var'),
             'notes' => $this->input->post('notes')
         );
         $nametemp = 'image_file';
+    
         if (isset($_FILES[$nametemp]['name'])) {
             $directory = 'files/printmarktest/' . $print_mark_test_list_id;
-
+    
             if (!file_exists($directory)) {
                 $oldumask = umask(0);
-                mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
+                mkdir($directory, 0777);
                 umask($oldumask);
             }
+    
             $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-            $uploadTo = $directory;
             $imageName = $_FILES[$nametemp]['name'];
             $tempPath = $_FILES[$nametemp]["tmp_name"];
-            //$basename = basename($imageName);
-
             $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-
-            $basename = 'dt-' . $id . '-vt-' . $print_mark_test_list_id . '-image-1.' . $imageType; // 5dab1961e93a7_1571494241.jpg
+            $basename = 'dt-' . $id . '-vt-' . $print_mark_test_list_id . '-image-1.' . $imageType;
             $originalPath = $directory . '/' . $basename;
-            if (in_array($imageType, $allowedImageType)) {
-                // Upload file to server 
+    
+            if (in_array(strtolower($imageType), $allowedImageType)) {
+                // Hapus file lama jika ada
                 if (file_exists($originalPath)) {
-                    // Hapus file lama
                     unlink($originalPath);
                 }
-                if (move_uploaded_file($tempPath, $originalPath)) {
+    
+                // Kompres dan upload gambar menggunakan compress_image
+                $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+    
+                if ($compressed) {
                     $data_box['image_file'] = $basename;
                     $data_box['updated_by'] = $this->session->userdata('id');
                     $data_box['updated_at'] = date("Y-m-d H:i:s");
+                    
                     if ($this->model_print_mark_test_list->print_mark_test_list_detail_update($data_box, array("id" => $id))) {
                         echo json_encode(array('success' => true));
                     } else {
                         echo json_encode(array('msg' => $this->db->_error_message()));
                     }
                 } else {
-                    echo 'image Not uploaded ! try again';
+                    echo 'Image not uploaded! Try again.';
                 }
             }
         } else {
+            // Update tanpa mengunggah gambar
             $data_box['updated_by'] = $this->session->userdata('id');
             $data_box['updated_at'] = date("Y-m-d H:i:s");
+            
             if ($this->model_print_mark_test_list->print_mark_test_list_detail_update($data_box, array("id" => $id))) {
                 echo json_encode(array('success' => true));
             } else {
@@ -342,6 +362,7 @@ class print_mark_test_list extends CI_Controller {
             }
         }
     }
+    
 
     function prints() {
         $jenis_laporan = $this->input->post('jenis_laporan');
