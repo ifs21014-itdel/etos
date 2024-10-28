@@ -38,7 +38,7 @@ class Pdf
 
     function print_test_to_pdf($html, $filename, $stream = TRUE)
     {
-        echo $html;
+//        echo $html;
 //        exit;
         require_once("dompdf/dompdf_config.inc.php");
         spl_autoload_register("DOMPDF_autoload");
