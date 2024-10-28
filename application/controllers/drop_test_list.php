@@ -29,19 +29,19 @@ class drop_test_list extends CI_Controller {
     function compress_image($tempPath, $originalPath, $imageType) {
         $compressed = false;
         $imageType = strtolower($imageType);
-    
+
         if ($imageType === 'jpg' || $imageType === 'jpeg') {
             $image = imagecreatefromjpeg($tempPath);
-            $compressed = imagejpeg($image, $originalPath, 40); 
+            $compressed = imagejpeg($image, $originalPath, 40);
         } elseif ($imageType === 'png') {
             $image = imagecreatefrompng($tempPath);
-            $compressed = imagepng($image, $originalPath, 2); 
+            $compressed = imagepng($image, $originalPath, 2);
         }
-    
+
         if (isset($image)) {
-            imagedestroy($image); 
+            imagedestroy($image);
         }
-    
+
         return $compressed;
     }
 
@@ -49,8 +49,8 @@ class drop_test_list extends CI_Controller {
         $data_drop_test_list_detail = array(
             "protocol_test_id" => $this->input->post('protocol_test_id'),
             "client_id" => $this->input->post('client_id'),
-            "vendor_id" =>  $this->input->post('vendor_id'),
-            "product_id" =>  $this->input->post('product_id'),
+            "vendor_id" => $this->input->post('vendor_id'),
+            "product_id" => $this->input->post('product_id'),
             "submited" => 'f',
             "test_date" => $this->input->post('test_date') ?: NULL,
             "carton_dimension" => $this->input->post('carton_dimension'),
@@ -62,15 +62,15 @@ class drop_test_list extends CI_Controller {
             "corrective_action_plan_image" => $this->input->post('corrective_action_plan_image'),
             "notes" => $this->input->post('notes')
         );
-        
+
         $nametemp_product = 'product_image';
         $id_dir = $id;
-        
+
         if ($id == 0) {
             $maxid = $this->model_drop_test_list->get_drop_test_list_max_id();
             $id_dir = 1 + $maxid[0]->max_id;
         }
-    
+
         if (isset($_FILES[$nametemp_product]['name'])) {
             $directory = 'files/droptest/' . $id_dir;
             if (!file_exists($directory)) {
@@ -78,7 +78,7 @@ class drop_test_list extends CI_Controller {
                 mkdir($directory, 0777);
                 umask($oldumask);
             }
-    
+
             $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
             $uploadTo = $directory;
             $imageName = $_FILES[$nametemp_product]['name'];
@@ -86,14 +86,14 @@ class drop_test_list extends CI_Controller {
             $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
             $basename = 'product_image-' . $id_dir . '.' . $imageType;
             $originalPath = $directory . '/' . $basename;
-    
+
             if (in_array(strtolower($imageType), $allowedImageType)) {
                 if (file_exists($originalPath)) {
                     unlink($originalPath);
                 }
-    
+
                 $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
-    
+
                 if ($compressed) {
                     $data_drop_test_list_detail['product_image'] = $basename;
                 } else {
@@ -102,7 +102,7 @@ class drop_test_list extends CI_Controller {
                 }
             }
         }
-    
+
         if ($id == 0) {
             $data_drop_test_list_detail['created_by'] = $this->session->userdata('id');
             if ($this->model_drop_test_list->insert($data_drop_test_list_detail)) {
@@ -120,8 +120,6 @@ class drop_test_list extends CI_Controller {
             }
         }
     }
-    
-
 
     function update_status() {
         if ($this->model_drop_test_list->update(array("status" => $this->input->post("status")), array("id" => $this->input->post('id')))) {
@@ -204,31 +202,31 @@ class drop_test_list extends CI_Controller {
             'var_type' => $this->input->post('var_type')
         );
         $nametemp = 'image_file';
-    
+
         if (isset($_FILES[$nametemp]['name'])) {
             $directory = 'files/droptest/' . $drop_test_list_id;
-    
+
             if (!file_exists($directory)) {
                 $oldumask = umask(0);
                 mkdir($directory, 0777); // or even 01777 so you get the sticky bit set
                 umask($oldumask);
             }
-    
+
             $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
             $imageName = $_FILES[$nametemp]['name'];
             $tempPath = $_FILES[$nametemp]["tmp_name"];
             $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
-    
+
             $basename = 'dt-' . $id . '-vt-' . $drop_test_list_id . '-image-1.' . $imageType;
             $originalPath = $directory . '/' . $basename;
-    
+
             if (in_array(strtolower($imageType), $allowedImageType)) {
                 // Panggil fungsi compress_image untuk kompresi dan upload
                 $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
-    
+
                 if ($compressed) {
                     $data_box['image_file'] = $basename;
-    
+
                     if ($id == 0) {
                         $data_box['created_by'] = $this->session->userdata('id');
                         if ($this->model_drop_test_list->drop_test_list_detail_insert($data_box)) {
@@ -289,7 +287,53 @@ class drop_test_list extends CI_Controller {
         $this->load->view('drop_test_list/variabel_test/input_image', $data);
     }
 
-  
+    function variabel_test_save($drop_test_list_id, $id) {
+        $data_box = array(
+            'result_test_var' => $this->input->post('result_test_var'),
+            'notes' => $this->input->post('notes')
+        );
+        $nametemp = 'image_file';
+        $directory = 'files/droptest/' . $drop_test_list_id;
+
+        if (!file_exists($directory)) {
+            $oldumask = umask(0);
+            mkdir($directory, 0777);
+            umask($oldumask);
+        }
+        $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
+
+        // Proses untuk image 1
+        if (isset($_FILES[$nametemp]['name'])) {
+            $imageName = $_FILES[$nametemp]['name'];
+            $tempPath = $_FILES[$nametemp]["tmp_name"];
+            $imageType = pathinfo($imageName, PATHINFO_EXTENSION);
+            $basename = 'pt-' . $id . '-vt-' . $drop_test_list_id . '-image-1.' . $imageType;
+            $originalPath = $directory . '/' . $basename;
+
+            if (in_array(strtolower($imageType), $allowedImageType)) {
+                if (file_exists($originalPath)) {
+                    unlink($originalPath);
+                }
+
+                $compressed = $this->compress_image($tempPath, $originalPath, $imageType);
+                if ($compressed) {
+                    $data_box['image_file'] = $basename;
+                } else {
+                    echo 'Image 1 not uploaded! Try again.';
+                    exit();
+                }
+            }
+        }
+        $data_box['updated_by'] = $this->session->userdata('id');
+        $data_box['updated_at'] = date("Y-m-d H:i:s");
+
+        if ($this->model_drop_test_list->drop_test_list_detail_update($data_box, array("id" => $id))) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => $this->db->_error_message()));
+        }
+    }
+
     function prints() {
         $jenis_laporan = $this->input->post('jenis_laporan');
         $id = $this->input->post('id');
@@ -297,16 +341,17 @@ class drop_test_list extends CI_Controller {
         $data['drop_test_list_detail'] = $this->model_drop_test_list->drop_test_list_detail_select_by_drop_test_list_detail_id($id);
         $this->load->view('drop_test_list/print', $data);
     }
+
     public function generate_pdf() {
         try {
             $jenis_laporan = $this->input->post('jenis_laporan');
             $id = $this->input->post('id');
-    
+
             $this->load->library('pdf');
-            
+
             $data['drop_test_list'] = $this->model_drop_test_list->select_by_id($id);
             $data['drop_test_list_detail'] = $this->model_drop_test_list->drop_test_list_detail_select_by_drop_test_list_detail_id($id);
-    
+
             $html = $this->load->view('drop_test_list/print_pdf', $data, TRUE);
             $this->pdf->print_test_to_pdf($html, 'drop_test');
         } catch (Exception $e) {
@@ -314,22 +359,20 @@ class drop_test_list extends CI_Controller {
             echo "Error generating PDF. Please check the log.";
         }
     }
-    
 
     function excel() {
         $this->load->model('model_drop_test_list_excel');
-        
-        $id = $this->input->post('id'); 
-        
-        $data['drop_test_list'] = $this->model_drop_test_list->select_by_id($id); 
+
+        $id = $this->input->post('id');
+
+        $data['drop_test_list'] = $this->model_drop_test_list->select_by_id($id);
         $data['drop_test_list_detail'] = $this->model_drop_test_list->drop_test_list_detail_select_by_drop_test_list_detail_id($id);
-      
-        $this->load->model('model_drop_test_list_excel'); 
+
+        $this->load->model('model_drop_test_list_excel');
         $this->model_drop_test_list_excel->initialize($data['drop_test_list'], $data['drop_test_list_detail']);
-       
-        $this->model_drop_test_list_excel->download(); 
+
+        $this->model_drop_test_list_excel->download();
     }
-    
 
     function print_summary() {
         $id = $this->input->post('id');
@@ -376,5 +419,4 @@ class drop_test_list extends CI_Controller {
     function isPC() {
         return preg_match("/(windows|linux|)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
-
 }
