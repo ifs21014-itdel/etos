@@ -185,11 +185,11 @@ class product_test_list extends CI_Controller {
         }
     
         $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-        $imageFields = [
+        $imageFields = array(
             'image_file' => 'image-1',
             'image2_file' => 'image-2',
             'image3_file' => 'image-3'
-        ];
+        );
     
         foreach ($imageFields as $field => $suffix) {
             if (isset($_FILES[$field]['name']) && !empty($_FILES[$field]['name'])) {
@@ -292,11 +292,11 @@ class product_test_list extends CI_Controller {
         }
     
         $allowedImageType = array('jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG');
-        $imageFields = [
+        $imageFields = array(
             'image_file' => 'image-1',
             'image2_file' => 'image-2',
             'image3_file' => 'image-3'
-        ];
+        );
     
         foreach ($imageFields as $field => $suffix) {
             if (isset($_FILES[$field]['name']) && !empty($_FILES[$field]['name'])) {
