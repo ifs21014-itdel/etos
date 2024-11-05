@@ -47,24 +47,24 @@ class hot_cold_test_list extends CI_Controller{
 
     function save($id) {
         $data_hot_cold_test_list_detail = array(
-            "protocol_test_id" => $this->input->post('protocol_test_id') ?: NULL,
+            "protocol_test_id" => $this->input->post('protocol_test_id') ? $this->input->post('protocol_test_id'): NULL,
             "client_id" => $this->input->post('client_id'),
             "vendor_id" =>  $this->input->post('vendor_id'),
             "product_id" =>  $this->input->post('product_id'),
             "submited" => 'f',
-            "test_date" => $this->input->post('test_date') ?: NULL,
+            "test_date" => $this->input->post('test_date') ? $this->input->post('test_date'): NULL,
             "brand" => $this->input->post('brand'),
-            "report_date" => $this->input->post('report_date') ?: NULL,
+            "report_date" => $this->input->post('report_date') ? $this->input->post('report_date'): NULL,
             "report_no" => $this->input->post('report_no'),
             "corrective_action_plan_image" => $this->input->post('corrective_action_plan_image'),
             "notes" => $this->input->post('notes'),
-            "condition_a_temp" => $this->input->post('condition_a_temp') ?: NULL,
-            "condition_a_duration" => $this->input->post('condition_a_duration') ?: NULL,
-            "room_temp_rest_a_duration" => $this->input->post('room_temp_rest_a_duration') ?: NULL,
-            "condition_b_temp" => $this->input->post('condition_b_temp') ?: NULL,
-            "condition_b_duration" => $this->input->post('condition_b_duration') ?: NULL,
-            "room_temp_rest_b_duration" => $this->input->post('room_temp_rest_b_duration') ?: NULL,
-            "cycles" => $this->input->post('cycles') ?: NULL, // Pastikan ini integer
+            "condition_a_temp" => $this->input->post('condition_a_temp') ? $this->input->post('condition_a_temp'): NULL,
+            "condition_a_duration" => $this->input->post('condition_a_duration') ? $this->input->post('condition_a_duration'): NULL,
+            "room_temp_rest_a_duration" => $this->input->post('room_temp_rest_a_duration') ? $this->input->post('room_temp_rest_a_duration'): NULL,
+            "condition_b_temp" => $this->input->post('condition_b_temp') ? $this->input->post('condition_b_temp'): NULL,
+            "condition_b_duration" => $this->input->post('condition_b_duration') ? $this->input->post('condition_b_duration'): NULL,
+            "room_temp_rest_b_duration" => $this->input->post('room_temp_rest_b_duration') ? $this->input->post('room_temp_rest_b_duration'): NULL,
+            "cycles" => $this->input->post('cycles') ? $this->input->post('cycles'): NULL, // Pastikan ini integer
         );
     
         $nametemp_product = 'product_image';

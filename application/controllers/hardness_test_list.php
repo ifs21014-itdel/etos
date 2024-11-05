@@ -33,9 +33,9 @@ class hardness_test_list extends CI_Controller{
             "vendor_id" =>  $this->input->post('vendor_id'),
             "product_id" =>  $this->input->post('product_id'),
             "submited" => 'f',
-            "test_date" => $this->input->post('test_date') ?: NULL,
+            "test_date" => $this->input->post('test_date') ? $this->input->post('test_date'): NULL,
             "brand" => $this->input->post('brand'),
-            "report_date" => $this->input->post('report_date') ?: NULL,
+            "report_date" => $this->input->post('report_date') ? $this->input->post('report_date'): NULL,
             "report_no" => $this->input->post('report_no'),
             "corrective_action_plan_image" => $this->input->post('corrective_action_plan_image'),
             "notes" => $this->input->post('notes')
