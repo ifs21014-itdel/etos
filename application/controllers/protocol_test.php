@@ -32,7 +32,7 @@ class protocol_test extends CI_Controller {
             "test_name" => $this->input->post('test_name'),
             "protocol_name" => $this->input->post('protocol_name'),
             "description" => $this->input->post('description'),
-            "client_id" => $this->input->post('client_id')?:0
+            "client_id" => $this->input->post('client_id')?$this->input->post('client_id'):0
         );
 //        print_r($data_variabel_test);
 

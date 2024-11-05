@@ -52,7 +52,7 @@ class drop_test_list extends CI_Controller {
             "vendor_id" => $this->input->post('vendor_id'),
             "product_id" => $this->input->post('product_id'),
             "submited" => 'f',
-            "test_date" => $this->input->post('test_date') ?: NULL,
+            "test_date" => $this->input->post('test_date') ?    $this->input->post('test_date') : NULL,
             "carton_dimension" => $this->input->post('carton_dimension'),
             "gross_weight" => $this->input->post('gross_weight') ? $this->input->post('gross_weight') : 0,
             "nett_weight" => $this->input->post('nett_weight') ? $this->input->post('nett_weight') : 0,
